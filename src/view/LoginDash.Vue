@@ -1,14 +1,14 @@
 <script setup>
   import {onMounted} from 'vue';
-  import {useAuthStore} from '../stores/auth.js';
+  import {useCompetitorStore} from '../stores/competitor.js';
 
-  const authData = useAuthStore();
+  const competitorData = useCompetitorStore();
   onMounted(async() => {
-    await authData.getAuth();
+    await competitorData.getCompetitor();
 
   });
 
 </script>
 <template>
-   {{authData}}
+   {{competitorData.competitor}}
 </template>
