@@ -4,7 +4,7 @@ import router from './router'
 import App from './App.vue'
 //eslint-disable-next-line
 import axios from 'axios'
-
+import './axios';
 const pinia = createPinia()
 pinia.use(({ store }) => {
     store.router = markRaw(router);
