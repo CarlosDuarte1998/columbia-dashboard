@@ -15,7 +15,7 @@ const router = createRouter({
     },
     {
       path: '/competitor',
-      name: 'login',
+      name: 'competitor',
       component: CompetitorDash,
       meta: {
         requireAuth: false

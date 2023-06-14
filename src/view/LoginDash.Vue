@@ -1,18 +1,14 @@
 <script setup>
-/*eslint-disable*/
-import { onMounted } from 'vue';
-import {useAuthStore} from '../stores/auth.js';
+  import {onMounted} from 'vue';
+  import {useAuthStore} from '../stores/auth.js';
 
-const example = useAuthStore();
+  const authData = useAuthStore();
+  onMounted(async() => {
+    await authData.getAuth();
 
-onMounted(async() => {
-  await example.getAuth();
-
-});
+  });
 
 </script>
 <template>
-<div>
-    
-</div>
+   {{authData}}
 </template>

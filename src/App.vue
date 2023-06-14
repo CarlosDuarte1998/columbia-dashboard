@@ -1,14 +1,8 @@
 <script>
-import NavbarDash from './components/NavbarDash.vue'
-export default {
-  components: {
-    NavbarDash
-  }
-}
+//import NavbarDash from './components/NavbarDash.vue'
+import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-  <div>
-    <NavbarDash />
-  </div>
+  <RouterView />
 </template>

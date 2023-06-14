@@ -1,15 +1,15 @@
 // stores/counter.js
 import { defineStore } from 'pinia'
+import axios from 'axios';
 
-export const useCounterStore = defineStore('counter', {
-  state: () => {
-    return { count: 0 }
-  },
-  // could also be defined as
-  // state: () => ({ count: 0 })
+export const useAuthStore = defineStore('auth', {
+  state: () => ({
+    user: []
+  }),
   actions: {
-    increment() {
-      this.count++
-    },
+    async getAuth(){
+      const response = await axios.get('https://jsonplaceholder.typicode.com/todos');
+      this.user = response.data;
+    }
   },
 })
