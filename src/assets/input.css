@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@font-face {
+    font-family: 'GerTT-regular';
+    font-style: normal;
+    font-weight: normal; 
+    src: url('../assets/fonts/GerTT/GerTTRegular.otf') format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'GerTT-Medium';
+    font-style: normal;
+    font-weight: 500; 
+    src: url('../assets/fonts/GerTT/GerTTMedium.otf') format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'GerTT-Bold';
+    font-style: normal;
+    font-weight: bold; 
+    src: url('../assets/fonts/GerTT/GerTTBold.otf') format('truetype');
+  }

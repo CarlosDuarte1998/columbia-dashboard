@@ -3,7 +3,15 @@
 module.exports = {
   content: ["./src/**/*.{html,js,vue}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        gerttr: ['GerTT-regular'],
+        gerttb: ['GerTT-bold'],
+        gerttsm: ['GerTT-medium'],
+
+      },
+
+    },
   },
   plugins: [],
 }
