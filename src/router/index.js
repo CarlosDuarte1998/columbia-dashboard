@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Login from '../view/LoginDash.vue'
 import CompetitorDash from '../view/CompetitorDash.vue'
-import NavbarDash from '../components/NavbarDashboard.vue'
+
 // import {useAuthStore} from '../stores/auth_store.js';
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -25,7 +25,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: NavbarDash,
+      component: CompetitorDash,
       meta: {
         requireAuth: false
       }
