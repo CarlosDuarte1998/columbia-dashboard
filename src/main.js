@@ -26,7 +26,8 @@ library.add(
   IconsFa.faUser,
   IconsFa.faEye,
   IconsFa.faPencil,
-  IconsFa.faTrash
+  IconsFa.faTrash,
+  IconsFa.faClipboardCheck,
 )
 
 const app = createApp(App)

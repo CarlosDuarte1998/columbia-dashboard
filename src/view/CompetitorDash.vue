@@ -5,6 +5,7 @@ import HeaderDashboard from '../components/HeaderDashboard.vue'
 import sectionCoupons from '../components/sectionCoupons.vue'
 import sectionCompetitors from '../components/sectionCompetitors.vue'
 import sectionLogs from '../components/sectionLogs.vue'
+import sectionRegister from '../components/sectionRegister.vue'
 export default {
   data() {
     return {
@@ -19,7 +20,8 @@ export default {
     ModalsContainer,
     sectionCoupons,
     sectionCompetitors,
-    sectionLogs
+    sectionLogs,
+    sectionRegister
   },
   methods: {
     selectSection(sectionId) {
@@ -62,6 +64,14 @@ export default {
             <span class="flex-1 ml-3 whitespace-nowrap">Bitacoras</span>
           </a>
         </li>
+        <li>
+          <a href="#"
+            class="flex items-center transition duration-75 p-2 text-gray-600 rounded-lg hover:bg-gray-200 hover:text-black"
+            @click="selectSection('registro')">
+            <font-awesome-icon icon="fa-solid fa-clipboard-check" class="w-5 h-5"/>
+            <span class="flex-1 ml-3 whitespace-nowrap">Registros</span>
+          </a>
+        </li>
       </ul>
     </div>
   </aside>
@@ -77,7 +87,7 @@ export default {
         <div id="logs" v-show="activeSection === 'logs'">
           <sectionLogs />
         </div>
-        <div class=" hidden" id="signup" v-show="activeSection === 'signup'">Sign Up</div>
+        <div class="" id="registro" v-show="activeSection === 'registro'"><sectionRegister/></div>
       </div>
     </div>
     <ModalsContainer />

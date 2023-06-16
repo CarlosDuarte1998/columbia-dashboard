@@ -36,9 +36,23 @@
                 </div>
               </td>
               <td class="px-6 py-4">
-                <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                  >Edit user</a
-                >
+                <div class="font-medium flex">
+              <span class="pr-3">
+                <font-awesome-icon
+                  icon="fa-solid fa-eye"
+                  class="w-4 h-4  hover:text-black transition duration-150 cursor-pointer"
+              /></span>
+              <span class="pr-3">
+                <font-awesome-icon
+                  icon="fa-solid fa-pencil"
+                  class="w-4 h-4  hover:text-black transition duration-150 cursor-pointer"
+              /></span>
+              <span class="pr-3">
+                <font-awesome-icon
+                  icon="fa-solid fa-trash"
+                  class="w-4 h-4  hover:text-black transition duration-150 cursor-pointer"
+              /></span>
+            </div>
               </td>
             </tr>
           </tbody>
