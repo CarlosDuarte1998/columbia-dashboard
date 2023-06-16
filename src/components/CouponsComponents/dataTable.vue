@@ -4,11 +4,11 @@
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
       <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
         <tr class="pl-3">
-          <th scope="col" class="px-6 py-3">Nombre</th>
+          <th scope="col" class="px-6 py-3">Código</th>
           <th scope="col" class="px-6 py-3">Fecha de vencimiento</th>
           <th scope="col" class="">País</th>
           <th scope="col" class="px-6 py-3">Estado</th>
-          <th scope="col" class="px-6 py-3">acción</th>
+          <th scope="col" class="px-6 py-3">Acciones</th>
         </tr>
       </thead>
       <tbody>
@@ -29,13 +29,27 @@
           <td class="px-6 py-4">
             <div class="flex items-center">
               <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div>
-              Online
+              Activo
             </div>
           </td>
           <td class="px-6 py-4">
-            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-              >Edit user</a
-            >
+            <div class="font-medium flex">
+              <span class="pr-3">
+                <font-awesome-icon
+                  icon="fa-solid fa-eye"
+                  class="w-4 h-4  hover:text-black transition duration-150 cursor-pointer"
+              /></span>
+              <span class="pr-3">
+                <font-awesome-icon
+                  icon="fa-solid fa-pencil"
+                  class="w-4 h-4  hover:text-black transition duration-150 cursor-pointer"
+              /></span>
+              <span class="pr-3">
+                <font-awesome-icon
+                  icon="fa-solid fa-trash"
+                  class="w-4 h-4  hover:text-black transition duration-150 cursor-pointer"
+              /></span>
+            </div>
           </td>
         </tr>
       </tbody>

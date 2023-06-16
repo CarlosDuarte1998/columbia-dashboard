@@ -49,7 +49,6 @@ export default {
                 type="button"
                 class="flex text-sm justify-center items-center hover:text-white hover:bg-black p-2 border border-black transition duration-300"
                 aria-expanded="false"
-                data-dropdown-toggle="dropdown-user"
               >
                 <span class="sr-only">Open user menu</span>
                 <LockClosedIcon

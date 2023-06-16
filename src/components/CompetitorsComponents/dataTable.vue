@@ -9,11 +9,11 @@
             class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
           >
             <tr class="pl-3">
-              <th scope="col" class=" px-4 py-3">Nombre</th>
+              <th scope="col" class=" px-6 py-3">Nombre</th>
               <th scope="col" class=" px-4 py-3">Biografía</th>
               <th scope="col" class="">Instagram</th>
               <th scope="col" class=" px-4 py-3">Foto de perfil</th>
-              <th scope="col" class=" px-4 py-3">acción</th>
+              <th scope="col" class=" px-4 py-3">Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -32,8 +32,7 @@
               </td>
               <td class="px-6 py-4">
                 <div class="flex items-center">
-                  <div class="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div>
-                  Online
+                  <font-awesome-icon :icon="['fas', 'user']" class="h-7"/>
                 </div>
               </td>
               <td class="px-6 py-4">
