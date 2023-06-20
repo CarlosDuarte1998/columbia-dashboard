@@ -25,7 +25,7 @@ const emit = defineEmits(['confirm']);
                             <label for="brand" class="block mb-2 text-sm font-medium text-gray-900">Correo</label>
                             <input type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="correo@bethegoat.com" required>
                         </div>
-                        <div class="w-full">
+                        <div class="w-full">    
                             <label for="price" class="block mb-2 text-sm font-medium text-gray-900">Código</label>
                             <select id="category"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">

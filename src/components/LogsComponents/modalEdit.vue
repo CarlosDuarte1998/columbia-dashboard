@@ -1,12 +1,30 @@
 <script setup>
 import { VueFinalModal } from 'vue-final-modal'
-import { defineProps, defineEmits } from 'vue'
+import { defineProps, defineEmits, ref } from 'vue'
 
 defineProps({
 
 });
 
 const emit = defineEmits(['confirm']);
+
+/*Obtencion y manejo del DatePicker*/
+const date = ref(new Date());
+
+const handleDate = (modelData) => {
+    const options = {
+        day: 'numeric',
+        month: 'numeric',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true
+    };
+    date.value = modelData;
+    console.log(date.value.toLocaleDateString('es-ES', options));
+};
+
+
 </script>
 <template>
     <VueFinalModal class="coupon-modal" content-class="coupon-modal-content" overlay-transition="vfm-fade"
@@ -22,8 +40,8 @@ const emit = defineEmits(['confirm']);
                             <select id="category"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                                 <option selected="" disabled>Seleciona el competidor</option>
-                                <option value="TV">El Salvador</option>
-                                <option value="PC">Guatemala</option>
+                                <option value="TV">Carlos Duarte</option>
+                                <option value="PC">Alexander Duarte</option>
                             </select>
                         </div>
                         <div class="w-full">
@@ -35,16 +53,15 @@ const emit = defineEmits(['confirm']);
                         <div class="w-full">
                             <label for="price" class="block mb-2 text-sm font-medium text-gray-900">Fecha de
                                 registro</label>
-                            <input type="number" name="price" id="price"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-                                placeholder="$2999" required="" />
+                            <VueDatePicker :teleport="true" teleport-center :model-value="date" time-picker-inline
+                                :is-24="false" @update:model-value="handleDate" />
                         </div>
 
                     </div>
                     <div class="flex w-full justify-end items-center mt-8">
-                        <button @click="emit('confirm')" class="bg-red-600 p-2 rounded-md cursor-pointer text-white">
+                        <span @click="emit('confirm')" class="bg-red-600 p-2 rounded-md cursor-pointer text-white">
                             Cancelar
-                        </button>
+                        </span>
                         <button type="submit" class="bg-green-600 ml-2 p-2 rounded-md text-white cursor-pointer">
                             Guardar
                         </button>

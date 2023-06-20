@@ -1,14 +1,4 @@
-<script>
-import * as Icons from '@heroicons/vue/24/solid'
-export default {
-  name: 'App',
-  components: {
-    LockClosedIcon: Icons.LockClosedIcon,
-  },
-  methods: {
-  
-  }
-}
+<script setup>
 
 </script>
 <template>
@@ -51,10 +41,9 @@ export default {
                 aria-expanded="false"
               >
                 <span class="sr-only">Open user menu</span>
-                <LockClosedIcon
-                  class="w-7 h-5 mr-1 hover:text-white"
-                  aria-hidden="true"
-                />Cerrar Sesión
+                
+                <font-awesome-icon icon="fa-solid fa-lock"  class="w-6 h-4 mr-1 hover:text-white"/>
+                Cerrar Sesión
               </button>
             </div>
           </div>
