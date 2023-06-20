@@ -3,16 +3,11 @@
 import { onMounted, reactive } from "vue";
 import { useAuthStore } from "../stores/auth";
 
-
-
 const usuario = useAuthStore();
 const  formUser = reactive({
       email: '',
       password: '',
     });
-onMounted(() => {
- 
-});
 
 </script>
 <template>
@@ -45,13 +40,12 @@ onMounted(() => {
           </div>
 
           <div class="mt-6">
-            <button type="button" 
+            <button
               class="w-full px-6 py-3 text-white capitalize transition-colors duration-300 bg-black focus:ring-opacity-50 font-gerttb hover:bg-black">
               Iniciar sesión
               <font-awesome-icon :icon="['fas', 'arrow-right']" class=" hover:text-white transition duration-150" />
             </button>
           </div>
-          {{ formUser }}
         </form>
       </div>
     </div>
