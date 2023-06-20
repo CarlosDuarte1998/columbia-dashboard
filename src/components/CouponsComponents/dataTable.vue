@@ -7,8 +7,7 @@ import modalDelete from './modalDelete.vue';
 const { open: openEdit, close: closeEdit } = useModal({
   component: modalEdit,
   attrs: {
-    title: 'Editar cupón',
-    prueba: 'Hola mundo',
+   
     onConfirm() {
       closeEdit()
     }
@@ -58,9 +57,6 @@ const { open: openDelete, close: closeDelete } = useModal({
           </td>
           <td class="px-6 py-4">
             <div class="font-medium flex">
-              <span class="pr-3">
-                <font-awesome-icon icon="fa-solid fa-eye"
-                  class="w-4 h-4  hover:text-black transition duration-150 cursor-pointer" /></span>
               <span class="pr-3">
                 <font-awesome-icon icon="fa-solid fa-pencil"
                   class="w-4 h-4  hover:text-black transition duration-150 cursor-pointer" @click="openEdit" /></span>

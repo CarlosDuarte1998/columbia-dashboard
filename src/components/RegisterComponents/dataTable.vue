@@ -1,4 +1,26 @@
 <script setup>
+import { useModal } from 'vue-final-modal'
+import modalDelete from './modalDelete.vue';
+import modalEdit from './modalEdit.vue';
+
+
+const { open: openDelete, close: closeDelete } = useModal({
+  component: modalDelete,
+  attrs: {
+    onConfirm() {
+      closeDelete()
+    }
+  },
+});
+const { open: openEdit, close: closeEdit } = useModal({
+  component: modalEdit,
+  attrs: {
+    onConfirm() {
+      closeEdit()
+    }
+  },
+});
+
 
 </script>
 <template>
@@ -32,13 +54,13 @@
               <div class="font-medium flex">
                 <span class="pr-3">
                   <font-awesome-icon icon="fa-solid fa-eye"
-                    class="w-4 h-4  hover:text-black transition duration-150 cursor-pointer" /></span>
+                    class="w-4 h-4  hover:text-black transition duration-150 cursor-pointer hidden" /></span>
                 <span class="pr-3">
                   <font-awesome-icon icon="fa-solid fa-pencil"
-                    class="w-4 h-4  hover:text-black transition duration-150 cursor-pointer" /></span>
+                    class="w-4 h-4  hover:text-black transition duration-150 cursor-pointer" @click="openEdit"/></span>
                 <span class="pr-3">
                   <font-awesome-icon icon="fa-solid fa-trash"
-                    class="w-4 h-4  hover:text-black transition duration-150 cursor-pointer" /></span>
+                    class="w-4 h-4  hover:text-black transition duration-150 cursor-pointer" @click="openDelete"/></span>
               </div>
             </td>
           </tr>

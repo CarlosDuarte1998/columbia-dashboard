@@ -11,6 +11,8 @@ import { createVfm } from 'vue-final-modal'
 import 'vue-final-modal/style.css'
 import './axios'
 
+
+
 const pinia = createPinia()
 pinia.use(({ store }) => {
   store.router = markRaw(router)
@@ -33,6 +35,7 @@ library.add(
 const app = createApp(App)
 app.use(createVfm())
 app.use(VueSweetalert2)
+
 app.use(router)
 app.use(pinia)
 app.component('font-awesome-icon', FontAwesomeIcon)
