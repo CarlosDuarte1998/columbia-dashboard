@@ -1,12 +1,32 @@
 <script setup>
 import { VueFinalModal } from 'vue-final-modal'
-import { defineProps, defineEmits } from 'vue'
+import { defineProps, defineEmits, ref } from 'vue'
 
 defineProps({
-
 });
-
 const emit = defineEmits(['confirm']);
+
+
+/*Muestra de previsualizacion de imagen*/
+const selectedImage = ref('./src/assets/img/perfile.png');
+const handleImageChange = (event) => {
+  const file = event.target.files[0];
+  const reader = new FileReader();
+
+  reader.onload = () => {
+    selectedImage.value = reader.result;
+  };
+
+  if (file) {
+    reader.readAsDataURL(file);
+    console.log(file);
+  }
+  else {
+    selectedImage.value = './src/assets/img/perfile.png';
+  }
+};
+
+
 </script>
 <template>
   <VueFinalModal class="coupon-modal" content-class="coupon-modal-content" overlay-transition="vfm-fade"
@@ -38,13 +58,14 @@ const emit = defineEmits(['confirm']);
             </div>
             <div class="w-full">
               <label for="brand" class="block mb-2 text-sm font-medium ">Foto de usuario</label>
-              <input class="block w-full text-sm border border-gray-300 rounded-lg cursor-pointer bg-gray-50 " id="file_input" type="file">
+              <input class="block w-full text-sm border border-gray-300 rounded-lg cursor-pointer bg-gray-50 "
+                id="file_input" type="file" @change="handleImageChange">
             </div>
-            <div class="w-full">
-              <img src="" alt="">
+            <div class="w-full flex items-center justify-center">
+              <img v-if="selectedImage" :src="selectedImage" alt="" class="prev-img">
             </div>
             <div>
-              <label for="category" class="block mb-2 text-sm font-medium text-gray-900">Pais</label>
+              <label for="category" class="block mb-2 text-sm font-medium text-gray-900">País</label>
               <select id="country"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                 <option selected="" disabled>Seleciona el país</option>
@@ -56,7 +77,7 @@ const emit = defineEmits(['confirm']);
 
               <label for="message" class="block mb-2 text-sm font-medium text-gray-900">Biografía</label>
               <textarea id="message" rows="4"
-                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 "
                 placeholder="Escribe su biografía "></textarea>
 
             </div>
@@ -101,4 +122,10 @@ const emit = defineEmits(['confirm']);
 
 .dark .coupon-modal-content {
   background: #000;
-}</style>
+}
+
+.prev-img {
+  width: 100px;
+  height: 100px;
+}
+</style>

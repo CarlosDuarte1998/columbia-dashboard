@@ -28,7 +28,7 @@ const handleDate = (modelData) => {
 </script>
 <template>
     <VueFinalModal class="coupon-modal" content-class="coupon-modal-content" overlay-transition="vfm-fade"
-        content-transition="vfm-fade" :click-to-close="false">
+        content-transition="vfm-fade" :click-to-close="true">
         <section class="bg-white 0">
             <div class="">
                 <h2 class="mb-4 text-2xl font-gerttb text-gray-900">Añadir nueva bitacora</h2>
