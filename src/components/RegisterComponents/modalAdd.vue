@@ -1,12 +1,23 @@
 <script setup>
 import { VueFinalModal } from 'vue-final-modal'
-import { defineProps, defineEmits } from 'vue'
+import { defineProps, defineEmits, ref, onMounted } from 'vue'
+import { useCountryStore } from '@/stores/country'
 
 defineProps({
 
 });
 
 const emit = defineEmits(['confirm']);
+
+/*Obtencion de datos del almacen*/
+const countryStore = useCountryStore();
+const countries = ref([]);
+
+onMounted(async () => {
+    await countryStore.getCountries();
+    countries.value = countryStore.countries;
+});
+
 </script>
 <template>
     <VueFinalModal class="coupon-modal" content-class="coupon-modal-content" overlay-transition="vfm-fade"
@@ -39,11 +50,9 @@ const emit = defineEmits(['confirm']);
                             <select id="category"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                                 <option selected="" disabled>Seleciona el competidor</option>
-                                <option value="TV">El Salvador</option>
-                                <option value="PC">Guatemala</option>
+                                <option v-for="country in countries" :key="country.id">{{country.name}}</option>
                             </select>
                         </div>
-
                     </div>
                     <div class="flex w-full justify-end items-center mt-8">
                         <button @click="emit('confirm')" class="bg-red-600 p-2 rounded-md cursor-pointer text-white">

@@ -1,30 +1,23 @@
-<script>
-import HeaderDashboard from './HeaderDashboard.vue'
-import sectionCoupons from './sectionCoupons.vue'
-import sectionCompetitors from './sectionCompetitors.vue'
-import sectionLogs from './sectionLogs.vue'
-import sectionRegister from './sectionRegister.vue'
+<script setup>
+import { ref } from 'vue';
+import HeaderDashboard from './HeaderDashboard.vue';
+import sectionCoupons from './sectionCoupons.vue';
+import sectionCompetitors from './sectionCompetitors.vue';
+import sectionLogs from './sectionLogs.vue';
+import sectionRegister from './sectionRegister.vue';
 
-export default {
-  data() {
-    return {
-      activeSection: 'coupons'
-    }
-  },
-  name: 'App',
-  components: {
-    HeaderDashboard,
-    sectionCoupons,
-    sectionCompetitors,
-    sectionLogs,
-    sectionRegister
-  },
-  methods: {
-    selectSection(sectionId) {
-      this.activeSection = sectionId
-    }
-  }
-}
+
+
+const activeSection = ref('coupons');
+
+const selectSection = (sectionId) => {
+  activeSection.value = sectionId;
+};
+
+let user = JSON.parse(localStorage.getItem('user'));
+
+
+
 </script>
 
 <template>
@@ -36,6 +29,14 @@ export default {
       aria-label="Sidebar">
       <div class="h-full px-3 pb-4 overflow-y-auto bg-white">
         <ul class="space-y-2 font-medium">
+          <li>
+            <a 
+              class="flex items-center p-2 mb-4 transition duration-75 text-black rounded-lg"
+              >
+              <font-awesome-icon icon="fa-solid fa-circle-user" class="flex-shrink-0 w-6 h-6"/>
+              <span class="ml-3 span-user-name">{{ user.name}}</span>
+            </a>
+          </li>
           <li>
             <a href="#"
               class="flex items-center p-2 transition duration-75 text-gray-600 rounded-lg hover:text-white hover:bg-black"
@@ -99,3 +100,9 @@ export default {
     </div>
   </div>
 </template>
+
+<style scoped>
+.span-user-name{
+  font-size: 1.3rem !important;
+}
+</style>

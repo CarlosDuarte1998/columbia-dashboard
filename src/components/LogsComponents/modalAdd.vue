@@ -2,6 +2,7 @@
 import { VueFinalModal } from 'vue-final-modal'
 import { defineProps, defineEmits, ref } from 'vue'
 
+
 defineProps({
  
 });
@@ -22,6 +23,7 @@ const handleDate = (modelData) => {
     date.value = modelData;
     console.log(date.value.toLocaleDateString('es-ES', options));
 };
+
 
 
 </script>

@@ -1,5 +1,9 @@
 <script setup>
-
+const logout = () => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+  window.location.href = "/login";
+};
 </script>
 <template>
     <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200">
@@ -36,8 +40,9 @@
           <div class="flex items-center ml-3">
             <div>
               <button
+              @click="logout"
                 type="button"
-                class="flex text-sm justify-center items-center hover:text-white hover:bg-black p-2 border border-black transition duration-300"
+                class="flex text-sm justify-center items-center hover:text-white hover:bg-black p-2 border border-black transition duration-100"
                 aria-expanded="false"
               >
                 <span class="sr-only">Open user menu</span>

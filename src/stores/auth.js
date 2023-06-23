@@ -23,7 +23,10 @@ export const useAuthStore = defineStore('auth', {
         })
       },
       async authUser(){
-        await axios.post('/user-data', {headers: { 'Authorization': `Bearer ${this.token}` }})
+        await axios.post('/user-data', {
+          headers: { 'Authorization': `Bearer ${this.token}` }}
+          
+          )
         .then(response => {
           this.user_data = response.data.data;
         })
