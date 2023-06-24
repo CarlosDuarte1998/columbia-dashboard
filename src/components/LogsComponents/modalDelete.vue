@@ -3,15 +3,18 @@ import { VueFinalModal } from 'vue-final-modal'
 import { defineProps, defineEmits } from 'vue'
 
 defineProps({
-    
+  
 });
 // eslint-disable-next-line
 const emit = defineEmits(['confirm']);
+
+
+
 </script>
 <template>
     <VueFinalModal class="coupon-modal" content-class="coupon-modal-content" overlay-transition="vfm-fade"
         content-transition="vfm-fade" :click-to-close="true">
-        <section class="bg-white 0">
+        <section class="bg-white 0" >
             Delete
         </section>
     </VueFinalModal>

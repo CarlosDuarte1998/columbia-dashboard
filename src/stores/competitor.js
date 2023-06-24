@@ -1,22 +1,17 @@
-// stores/counter.js
+// stores/competitor.js
 import { defineStore } from 'pinia'
 import axios from 'axios'
 
-export const useCompetitorStore = defineStore('competitor', {
+export const useCompetitorStore = defineStore('competitors', {
   state: () => ({
-    competitor: []
+    competitors: [],
+    token: JSON.parse(localStorage.getItem('token')),
   }),
   actions: {
-    async getCompetitor() {
-      await axios
-        .get('/competitors')
-        .then((response) => {
-          this.competitor = response.data.data
-        })
-        .catch((error) => {
-          console.log(error)
-        })
-    },
+    async getCompetitors() {
+      const response = await axios.get('/competitors', {headers: { 'Authorization': `Bearer ${this.token}` }});
+            this.competitors = response.data.data;
+  },
     async storeCompetitor(){
     },
     async updateCompetitor(){

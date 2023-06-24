@@ -17,10 +17,10 @@ const { open: openAdd, close: closeAdd } = useModal({
        <div>
         <div class="mt-10">
     <div class="flex w-full justify-start">
-      <Button @click="openAdd" class="border border-black p-2 cursor-pointer  transition duration-200">
+      <button @click="openAdd" class="border border-black p-2 cursor-pointer  transition duration-200">
         Nuevo registro
         <font-awesome-icon icon="fa-solid fa-plus" />
-      </Button>
+      </button>
     </div>
     <div class="mt-8">
      <dataTable />

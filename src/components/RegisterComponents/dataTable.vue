@@ -2,7 +2,8 @@
 import { useModal } from 'vue-final-modal'
 import modalDelete from './modalDelete.vue';
 import modalEdit from './modalEdit.vue';
-
+import {useRegisterStore} from '@/stores/register'
+import { ref, onMounted } from 'vue';
 
 const { open: openDelete, close: closeDelete } = useModal({
   component: modalDelete,
@@ -20,7 +21,15 @@ const { open: openEdit, close: closeEdit } = useModal({
     }
   },
 });
+// Obtención de bitacora desde el almacén
+const registerStore = useRegisterStore();
+const registers = ref([]);
 
+onMounted(async () => {
+  await registerStore.getRegister()
+  registers.value = registerStore.registers
+  console.log(JSON.stringify(registers.value));
+});
 
 </script>
 <template>
@@ -36,19 +45,19 @@ const { open: openEdit, close: closeEdit } = useModal({
             <th scope="col" class="">Acciones</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody v-for="register in registers" :key="register.id">
           <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
             <td class="px-6 py-4">
               <div class="flex items-center text-black text-base font-semibold">
-                Carlos Alexander Duarte
+                {{ register.name  }}
               </div>
             </td>
-            <td class="px-3">cduarte@gmail.com</td>
+            <td class="px-3">{{ register.email }}</td>
             <td>
-              <p class=" text-base font-semibold">Uuxj8ie5</p>
+              <p class=" text-base font-semibold">cdjfjbdfj</p>
             </td>
             <td>
-              <p>El Salvador</p>
+              <span>{{ register.countries[0].name }}</span>
             </td>
             <td>
               <div class="font-medium flex">

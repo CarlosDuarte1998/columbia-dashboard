@@ -11,7 +11,6 @@ import VueSweetalert2 from 'vue-sweetalert2'
 import 'sweetalert2/dist/sweetalert2.min.css'
 import { createVfm } from 'vue-final-modal'
 import 'vue-final-modal/style.css'
-import Vue3EasyDataTable from 'vue3-easy-data-table';
 import 'vue3-easy-data-table/dist/style.css';
 import './axios'
 
@@ -44,8 +43,7 @@ const app = createApp(App)
 app.use(createVfm())
 app.use(VueSweetalert2)
 app.use(router)
-app.use(pinia)
-app.component('EasyDataTable', Vue3EasyDataTable);
+app.use(pinia) 
 app.component('VueDatePicker', VueDatePicker);
 app.component('font-awesome-icon', FontAwesomeIcon)
 app.mount('#app')
