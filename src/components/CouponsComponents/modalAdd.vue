@@ -41,7 +41,6 @@ onMounted(async () => {
 
 // Envios de datos de cupones desde al almacén
 
-
 const storeCoupons = useCouponsStore();
 const addCoupon = async () => {
   try {
@@ -63,6 +62,7 @@ const addCoupon = async () => {
     console.log('Error al agregar el cupón:', error);
   }
 };
+
 </script>
 <template>
   <VueFinalModal class="coupon-modal" content-class="coupon-modal-content" overlay-transition="vfm-fade"
@@ -105,7 +105,7 @@ const addCoupon = async () => {
             <span @click="emit('confirm')" class="bg-red-600 p-2 rounded-md cursor-pointer text-white">
               Cancelar
             </span>
-            <button @click="addCoupon" class="bg-green-600 ml-2 p-2 rounded-md text-white cursor-pointer">
+            <button @click.prevent="addCoupon" class="bg-green-600 ml-2 p-2 rounded-md text-white cursor-pointer">
               Guardar
             </button>
           </div>

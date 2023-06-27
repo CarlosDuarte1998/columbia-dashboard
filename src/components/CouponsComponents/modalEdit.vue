@@ -74,8 +74,8 @@ onMounted(async () => {
                         <div>
                             <label for="status" class="block mb-2 text-sm font-medium text-gray-900">Estado</label>
                             <select id="status"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
-                                <option selected="" disabled>Seleciona el estado</option>
+                                class="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg block w-full p-2.5">
+                                <option selected disabled class="text-black">Seleciona el estado</option>
                                 <option value="1">Activo</option>
                                 <option value="0">Inactivo</option>
                             </select>
