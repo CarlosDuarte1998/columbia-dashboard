@@ -5,8 +5,9 @@ import { defineProps, defineEmits } from 'vue'
 defineProps({
 
 });
-
+//eslint-disable-next-line no-unused-vars
 const emit = defineEmits(['confirm']);
+
 </script>
 <template>
   <VueFinalModal class="coupon-modal" content-class="coupon-modal-content" overlay-transition="vfm-fade"

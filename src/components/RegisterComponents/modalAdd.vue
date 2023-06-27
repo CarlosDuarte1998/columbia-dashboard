@@ -2,6 +2,7 @@
 import { VueFinalModal } from 'vue-final-modal'
 import { defineProps, defineEmits, ref, onMounted } from 'vue'
 import { useCountryStore } from '@/stores/country'
+import { useCouponsStore } from '@/stores/coupons'
 
 defineProps({
 
@@ -12,10 +13,15 @@ const emit = defineEmits(['confirm']);
 /*Obtencion de datos del almacen*/
 const countryStore = useCountryStore();
 const countries = ref([]);
+const couponStore = useCouponsStore();
+const coupons = ref([]);
 
 onMounted(async () => {
     await countryStore.getCountries();
     countries.value = countryStore.countries;
+    await couponStore.getCoupons();
+    coupons.value = couponStore.coupons;
+    console.log(JSON.stringify(coupons.value));
 });
 
 </script>
@@ -24,7 +30,7 @@ onMounted(async () => {
         content-transition="vfm-fade" :click-to-close="false">
         <section class="bg-white 0">
             <div class="">
-                <h2 class="mb-4 text-2xl font-gerttb text-gray-900">Editar registro</h2>
+                <h2 class="mb-4 text-2xl font-gerttb text-gray-900">Nuevo registro</h2>
                 <form action="#">
                     <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
                         <div class="sm:col-span-2">
@@ -41,18 +47,18 @@ onMounted(async () => {
                             <select id="category"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                                 <option selected="" disabled>Seleciona el código</option>
-                                <option value="TV">El Salvador</option>
-                                <option value="PC">Guatemala</option>
+                                <option v-for="coupon in coupons" :key="coupon.id">{{ coupon.code }}</option>
                             </select>
                         </div>
                         <div class="w-full">
                             <label for="price" class="block mb-2 text-sm font-medium text-gray-900">País</label>
-                            <select id="category"
+                            <select id="country"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                                 <option selected="" disabled>Seleciona el competidor</option>
                                 <option v-for="country in countries" :key="country.id">{{country.name}}</option>
                             </select>
                         </div>
+                        
                     </div>
                     <div class="flex w-full justify-end items-center mt-8">
                         <button @click="emit('confirm')" class="bg-red-600 p-2 rounded-md cursor-pointer text-white">

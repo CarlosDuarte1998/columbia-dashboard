@@ -28,7 +28,6 @@ const registers = ref([]);
 onMounted(async () => {
   await registerStore.getRegister()
   registers.value = registerStore.registers
-  console.log(JSON.stringify(registers.value));
 });
 
 </script>

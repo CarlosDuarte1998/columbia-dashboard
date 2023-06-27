@@ -17,6 +17,6 @@ export const useCompetitorStore = defineStore('competitors', {
     async updateCompetitor(){
     },
     async deleteCompetitor(){
-    },
+    }
   }
 })

@@ -2,36 +2,67 @@
 import { VueFinalModal } from 'vue-final-modal'
 import { defineProps, defineEmits, ref, onMounted } from 'vue'
 import { useCountryStore } from '@/stores/country'
+import Swal from 'sweetalert2/dist/sweetalert2';
+import { useCouponsStore } from '@/stores/coupons'
 
 defineProps({});
 
 const emit = defineEmits(['confirm']);
+let code = ref('');  
+let startFormatted = '';
+let endFormatted = '';
+let status = ref('');  
 
-/*Obtencion de datos de fechas*/
+
+// Obtencion de datos de fechas*
+
 const dateRange = ref({ start: new Date(), end: new Date() });
 const handleDate = (modelData, property) => {
-  const options = {
-    day: 'numeric',
-    month: 'numeric',
-    year: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-    hour12: true
-  };
   dateRange.value[property] = modelData;
-  console.log(dateRange.value[property].toLocaleDateString('es-ES', options));
+  const startDate = dateRange.value.start;
+  const endDate = dateRange.value.end;
+  startFormatted = startDate.toISOString().replace(/T/, ' ').replace(/\..+/, '');
+  endFormatted = endDate.toISOString().replace(/T/, ' ').replace(/\..+/, '');
 };
 
 
+
 // Obtención de países desde el almacén
+
 const countryStore = useCountryStore();
 const countries = ref([]);
-
 onMounted(async () => {
   await countryStore.getCountries();
   countries.value = countryStore.countries;
+  handleDate(dateRange.value.start, 'start');
+  handleDate(dateRange.value.end, 'end');
 });
 
+
+// Envios de datos de cupones desde al almacén
+
+
+const storeCoupons = useCouponsStore();
+const addCoupon = async () => {
+  try {
+    await storeCoupons.addCoupon({
+      code: code.value,
+      start_date: startFormatted,
+      end_date: endFormatted,
+      status: status.value,
+    });
+    emit('confirm');
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Your work has been saved',
+      showConfirmButton: false,
+      timer: 1500
+    })
+  } catch (error) {
+    console.log('Error al agregar el cupón:', error);
+  }
+};
 </script>
 <template>
   <VueFinalModal class="coupon-modal" content-class="coupon-modal-content" overlay-transition="vfm-fade"
@@ -44,34 +75,37 @@ onMounted(async () => {
             <div class="sm:col-span-2">
               <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Código del cupón
               </label>
-              <input type="text" name="name" id="name"
+              <input type="text" name="code" id="code" v-model="code"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
                 placeholder="BETHEGOAT2023" required="" />
             </div>
             <div class="w-full">
               <label for="brand" class="block mb-2 text-sm font-medium text-gray-900">Fecha de inicio</label>
               <VueDatePicker :teleport="true" teleport-center :model-value="dateRange.start" time-picker-inline
-                :is-24="false"  @update:model-value="modelData => handleDate(modelData, 'start')" />
+                :is-24="false" @update:model-value="modelData => handleDate(modelData, 'start')" />
             </div>
             <div class="w-full">
               <label for="price" class="block mb-2 text-sm font-medium text-gray-900">Fecha de fin</label>
               <VueDatePicker :teleport="true" teleport-center :model-value="dateRange.end" time-picker-inline
-                :is-24="false"  @update:model-value="modelData => handleDate(modelData, 'end')" />
+                :is-24="false" @update:model-value="modelData => handleDate(modelData, 'end')" />
             </div>
             <div>
-              <label for="category" class="block mb-2 text-sm font-medium text-gray-900">Pais</label>
-              <select id="category"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
-                <option selected="" disabled>Seleciona el país</option>
-                <option v-for="country in countries" :key="country.id">{{country.name}}</option>
+              <label for="status" class="block mb-2 text-sm font-medium text-gray-900">Estado</label>
+            <div class="flex items-center">
+              <select id="status"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-1/2 p-2.5 mr-4" required v-model="status" >
+                <option selected="" disabled>Seleciona el estado</option>
+                <option value="Activo">Activo</option>
+                <option value="Inactivo">Inactivo</option>
               </select>
+            </div>
             </div>
           </div>
           <div class="flex w-full justify-end items-center mt-8">
             <span @click="emit('confirm')" class="bg-red-600 p-2 rounded-md cursor-pointer text-white">
               Cancelar
             </span>
-            <button type="submit" class="bg-green-600 ml-2 p-2 rounded-md text-white cursor-pointer">
+            <button @click="addCoupon" class="bg-green-600 ml-2 p-2 rounded-md text-white cursor-pointer">
               Guardar
             </button>
           </div>

@@ -8,7 +8,8 @@
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
-    "tailwind": "npx tailwindcss -i ./src/assets/input.css -o ./src/assets/tailwind.css --watch"
+    "tailwind": "npx tailwindcss -i ./src/assets/input.css -o ./src/assets/tailwind.css --watch",
+    "lt": "npx lt --port 3000 --subdomain dive-columbia"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.0",

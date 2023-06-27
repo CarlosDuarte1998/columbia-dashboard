@@ -3,6 +3,7 @@ import { VueFinalModal } from 'vue-final-modal'
 import { defineProps, defineEmits, ref, onMounted } from 'vue'
 import {useCountryStore} from '@/stores/country'
 
+
 defineProps({
 });
 const emit = defineEmits(['confirm']);
@@ -35,6 +36,7 @@ onMounted(async () => {
   await countryStore.getCountries();
   countries.value = countryStore.countries;
 });
+
 
 
 </script>
@@ -134,7 +136,7 @@ onMounted(async () => {
 }
 
 .prev-img {
-  width: 100px;
+  width: auto;
   height: 100px;
 }
 </style>
