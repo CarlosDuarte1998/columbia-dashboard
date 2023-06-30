@@ -2,27 +2,14 @@
 import { VueFinalModal } from 'vue-final-modal'
 import { defineProps, defineEmits, ref, onMounted } from 'vue'
 import {useCompetitorStore} from '@/stores/competitor'
+import {useHistoriesStore} from '@/stores/history'
+import Swal from 'sweetalert2/dist/sweetalert2';
 
 defineProps({
- 
 });
 const emit = defineEmits(['confirm']);
 
-/*Obtencion y manejo del DatePicker*/
-const date = ref(new Date());
 
-const handleDate = (modelData) => {
-    const options = {
-        day: 'numeric',
-        month: 'numeric',
-        year: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-        hour12: true
-    };
-    date.value = modelData;
-    console.log(date.value.toLocaleDateString('es-ES', options));
-};
 
 const competitorStore = useCompetitorStore();
 const competitors = ref([]);
@@ -31,6 +18,46 @@ onMounted(async () => {
   await competitorStore.getCompetitors()
   competitors.value = competitorStore.competitors
 });
+
+// Envios de datos de datos al almacén si la respuesta es exotosa se abre la alerta se hata con .then y syntaxis de async await
+let competitor = ref('');
+let distance = ref('');
+let time = ref('');
+
+const storeHistories = useHistoriesStore();
+const addHistory = async () => {
+  emit('confirm');
+  try {
+  const response =  await storeHistories.addHistory({
+      competitor_id: competitor.value,
+      distance: distance.value,
+      time: time.value,
+    });
+
+    if (response.status == 201){
+      Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Your work has been saved',
+      showConfirmButton: false,
+      timer: 1500
+    })
+    }
+    else{
+      Swal.fire({
+      position: 'top-end',
+      icon: 'error',
+      title: 'Your work has been saved',
+      showConfirmButton: false,
+      timer: 1500
+    })
+    }
+   
+   
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 
 
@@ -41,28 +68,28 @@ onMounted(async () => {
     <section class="bg-white 0">
       <div class="">
         <h2 class="mb-4 text-2xl font-gerttb text-gray-900">Añadir nueva bitacora</h2>
-        <form action="#">
+        <form action="#" @submit.prevent="addHistory">
           <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
             <div class="sm:col-span-2">
               <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Competidor
               </label>
               <select id="category"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required v-model="competitor">
                 <option selected="" disabled>Seleciona el competidor</option>
-                <option v-for="competitor in competitors" :key="competitor.id">{{ competitor.name }}</option>
-                
+                <option v-for="competitor in competitors" :key="competitor.id" :value=" competitor.id ">{{ competitor.name }} - {{ competitor.countries[0].name }}</option>
               </select>
             </div>
             <div class="w-full">
               <label for="brand" class="block mb-2 text-sm font-medium text-gray-900">Distancia</label>
-              <input type="number" name="brand" id="brand"
+              <input type="number" name="distance" id="distance"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-                placeholder="20 m" required="" />
+                placeholder="20 m" required="" v-model="distance" />
             </div>
             <div class="w-full">
-              <label for="price" class="block mb-2 text-sm font-medium text-gray-900">Fecha de registro</label>
-              <VueDatePicker :teleport="true" teleport-center :model-value="date" time-picker-inline
-              :is-24="false" @update:model-value="handleDate" />
+              <label for="price" class="block mb-2 text-sm font-medium text-gray-900">Tiempo</label>
+              <input type="number" name="time" id="time"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
+                placeholder="2 horas" required="" v-model="time" />
             </div>
   
           </div>

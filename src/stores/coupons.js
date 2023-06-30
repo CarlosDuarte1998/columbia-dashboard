@@ -32,6 +32,7 @@ export const useCouponsStore = defineStore('coupons', {
         async deleteCoupon(id) {
             await axios.delete(`/discount-codes/${id}`, { headers: { 'Authorization': `Bearer ${this.token}` } })
                 .then(response => {
+                    console.log(response);
                     this.coupons = this.coupons.filter(coupon => coupon.id !== id);
                 })
                 .catch(error => {

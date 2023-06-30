@@ -1,21 +1,11 @@
 <script setup>
 import { useModal } from 'vue-final-modal'
-import modalDelete from './modalDelete.vue';
 import modalEdit from './modalEdit.vue';
 import { ref, onMounted } from 'vue';
-import { useHistoriesStore } from '@/stores/history'
+import { useHistoriesStore } from '@/stores/history';
+import Swal from 'sweetalert2';
 
-const { open: openDelete, close: closeDelete } = useModal({
-  component: modalDelete,
-  props:{
-    historyId: null
-  },
-  attrs: {
-    onConfirm() {
-      closeDelete()
-    }
-  },
-});
+
 const { open: openEdit, close: closeEdit } = useModal({
   component: modalEdit,
   attrs: {
@@ -35,7 +25,44 @@ onMounted(async () => {
   histories.value = historyStore.histories
 });
 
+// Se realiza la pregunta con swal para confirmar la eliminación de la bitacora y si confirma se envia el id al stores
 
+const deleteHistory = async (id) => {
+  console.log(id)
+  const result = await Swal.fire({
+    title: '¿Estás seguro?',
+    text: "¡No podrás revertir esto!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#449d48',
+    cancelButtonColor: '#d33',
+    confirmButtonText: '¡Sí, bórralo!',
+    cancelButtonText: 'Cancelar'
+  })
+  if (result.isConfirmed) {
+  const reponse = await historyStore.deleteHistory(id)
+    histories.value = historyStore.histories
+   if(reponse){
+    Swal.fire(
+      '¡Eliminado!',
+      'Tu archivo ha sido eliminado.',
+      'success'
+    )
+   }else{
+    Swal.fire(
+      'Error',
+      'No se pudo eliminar el registro',
+      'error'
+    )
+   }
+  }else{
+    Swal.fire(
+      'Cancelado',
+      'Tu archivo está a salvo :)',
+      'error'
+    )
+  }
+};
 
 
 
@@ -47,8 +74,9 @@ onMounted(async () => {
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr class="pl-3">
             <th scope="col" class=" px-6 py-3">Competidor</th>
+            <th scope="col" class=" px-6 py-3">País</th>
             <th scope="col" class=" px-4 py-3">Distancia</th>
-            <th scope="col" class="">Fecha</th>
+            <th scope="col" class="">time</th>
             <th scope="col" class="">Acciones</th>
           </tr>
         </thead>
@@ -59,10 +87,11 @@ onMounted(async () => {
                 {{ history.competitor.name }}
               </div>
             </td>
-            <td class="px-3">{{ history.distance }}</td>
+            <td class="px-3">{{ history.competitor.countries[0].name }}</td>
+            <td class="px-3">{{history.distance}} m</td>
 
             <td>
-            {{ history.time }}
+            {{ history.time }} horas
             </td>
             <td>
               <div class="font-medium flex">
@@ -72,7 +101,7 @@ onMounted(async () => {
                     class="w-4 h-4  hover:text-black transition duration-150 cursor-pointer"   @click="openEdit"/></span>
                 <span class="pr-3">
                   <font-awesome-icon icon="fa-solid fa-trash"
-                    class="w-4 h-4  hover:text-black transition duration-150 cursor-pointer" @click="openDelete(history.id)" /></span>
+                    class="w-4 h-4  hover:text-black transition duration-150 cursor-pointer" @click="deleteHistory(history.id)" /></span>
               </div>
             </td>
           </tr>
