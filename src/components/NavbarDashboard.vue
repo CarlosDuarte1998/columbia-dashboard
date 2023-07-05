@@ -38,30 +38,26 @@ let user = JSON.parse(localStorage.getItem('user'));
             </a>
           </li>
           <li>
-            <a href="#"
+            <router-link active-class="active" to="/coupons"
               class="flex items-center p-2 transition duration-75 text-gray-600 rounded-lg hover:text-white hover:bg-black"
-              @click="selectSection('coupons')"
-              :class="{'bg-black': activeSection === 'coupons', 'text-white': activeSection === 'coupons'}"
               >
               <font-awesome-icon icon="fa-solid fa-ticket" class="flex-shrink-0 w-6 h-6"/>
               <span class="ml-3">Cupones</span>
-            </a>
+            </router-link>
           </li>
           <li>
-            <a href="#"
+            <router-link active-class="active" to="/competitor"
               class="flex items-center p-2 transition duration-75 text-gray-600 rounded-lg hover:text-white hover:bg-black"
-              :class="{'bg-black': activeSection === 'competitors', 'text-white': activeSection === 'competitors'}"
-              @click="selectSection('competitors')">
+            >
               <font-awesome-icon icon="fa-solid fa-person-hiking" class="flex-shrink-0 w-6 h-6"/>
               <span class="flex-1 ml-3 whitespace-nowrap">Competidores</span>
-            </a>
+            </router-link>
           </li>
 
           <li>
             <a href="#"
               class="flex items-center transition duration-75 p-2 text-gray-600 rounded-lg hover:text-white hover:bg-black"
               @click="selectSection('logs')"
-              :class="{'bg-black': activeSection === 'logs', 'text-white': activeSection === 'logs'}"
               >
               <font-awesome-icon :icon="['fas', 'compass']" class="w-5 h-5" />
               <span class="flex-1 ml-3 whitespace-nowrap">Bitacoras</span>
@@ -71,7 +67,6 @@ let user = JSON.parse(localStorage.getItem('user'));
             <a href="#"
               class="flex items-center transition duration-75 p-2 text-gray-600 rounded-lg hover:text-white hover:bg-black"
               @click="selectSection('registro')"
-              :class="{'bg-black': activeSection === 'registro', 'text-white': activeSection === 'registro'}"
               >
               <font-awesome-icon icon="fa-solid fa-clipboard-check" class="w-5 h-5" />
               <span class="flex-1 ml-3 whitespace-nowrap">Registros</span>
@@ -105,4 +100,9 @@ let user = JSON.parse(localStorage.getItem('user'));
 .span-user-name{
   font-size: 1.3rem !important;
 }
+.active{
+  background: #000000;
+  color: white;
+}
+
 </style>

@@ -1,13 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Login from '../view/LoginDash.vue'
 import CompetitorDash from '../view/CompetitorDash.vue'
+import Coupon from '../view/Coupon.vue'
 
 // import {useAuthStore} from '../stores/auth_store.js';
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/login',
+      path: '/',
       name: 'login',
       component: Login,
       meta: {
@@ -23,22 +24,13 @@ const router = createRouter({
       }
     },
     {
-      path: '/',
-      name: 'home',
-      component: CompetitorDash,
+      path: '/coupons',
+      name: 'coupon',
+      component: Coupon,
       meta: {
         requireAuth: false
       }
     },
-  
-    // {
-    //   path: '/home',
-    //   name: 'home',
-    //   component: Home,
-    //   meta: {
-    //     requireAuth: true
-    //   }
-    // },
   ]
 })
 

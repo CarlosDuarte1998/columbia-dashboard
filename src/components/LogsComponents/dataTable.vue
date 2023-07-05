@@ -87,6 +87,7 @@ const deleteHistory = async (id) => {
                 {{ history.competitor.name }}
               </div>
             </td>
+            {{ history.competitor }}
             <td class="px-3">{{ history.competitor.countries[0].name }}</td>
             <td class="px-3">{{history.distance}} m</td>
 
