@@ -15,9 +15,9 @@ onMounted(() => {
 </script>
 
 <template>
-    <div v-if="user !== '' && token !== ''">
-        <NavbarDashboard />
-        <ModalsContainer />
-        <p>Cupones</p>
-    </div>
+  <div v-if="user !== '' && token !== ''">
+    <NavbarDashboard />
+    <ModalsContainer />
+    <p>Bitacoras</p>
+  </div>
 </template>
