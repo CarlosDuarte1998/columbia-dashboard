@@ -10,8 +10,11 @@ export const useCompetitorStore = defineStore('competitors', {
   }),
   actions: {
     async getCompetitors() {
-      const response = await axios.get('/competitors', { headers: { 'Authorization': `Bearer ${this.token}` } });
-      this.competitors = response.data.data;
+      await axios.get('/competitors', { headers: { 'Authorization': `Bearer ${this.token}` } })
+      .then(response => {
+        this.competitors = response.data.data;
+        console.log(this.competitors);
+      })
     },
     async addCompetitor(data) {
       await axios.post('/competitors/', {

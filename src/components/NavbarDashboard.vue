@@ -3,14 +3,6 @@ import { ref } from 'vue';
 import HeaderDashboard from './HeaderDashboard.vue';
 import sectionRegister from './SectionRegister.vue';
 
-
-
-const activeSection = ref('coupons');
-
-const selectSection = (sectionId) => {
-  activeSection.value = sectionId;
-};
-
 let user = JSON.parse(localStorage.getItem('user'));
 
 

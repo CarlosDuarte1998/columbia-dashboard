@@ -21,11 +21,9 @@ const { open: openEdit, close: closeEdit } = useModal({
 
 /* Obtención de datos del store */
 const couponsStore = useCouponsStore();
-const coupons = ref([]);
 
 const getCoupons = async () => {
   await couponsStore.getCoupons();
-  coupons.value = couponsStore.coupons;
 };
 
 onMounted(getCoupons);
@@ -70,8 +68,8 @@ const deleteCoupon = async (id) => {
 </script>
 
 <template>
-  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <!-- tabla y encabezados -->
+  <div class="mt-8 p-4" style="width:80%; float:right; margin-right:10px">
+    <h1 class="font-bold text-2xl mb-2">Cupones</h1>
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
       <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
         <tr class="pl-3">
@@ -84,7 +82,7 @@ const deleteCoupon = async (id) => {
       </thead>
 
       <!-- filas de la tabla -->
-      <tbody v-for="coupon in coupons" :key="coupon.id">
+      <tbody v-for="coupon in couponsStore.coupons" :key="coupon.id">
         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
           <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
             <div class="">

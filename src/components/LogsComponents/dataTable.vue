@@ -21,8 +21,7 @@ const historyStore = useHistoriesStore();
 const histories = ref([]);
 
 onMounted(async () => {
-  await historyStore.getHistories()
-  histories.value = historyStore.histories
+  await historyStore.getHistories();
 });
 
 // Se realiza la pregunta con swal para confirmar la eliminación de la bitacora y si confirma se envia el id al stores
@@ -70,6 +69,7 @@ const deleteHistory = async (id) => {
 <template>
   <div class="mt-8">
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+      {{histories}}
       <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr class="pl-3">

@@ -18,7 +18,6 @@ onMounted(() => {
 <template>
   <div v-if="user !== '' && token !== ''">
     <NavbarDashboard />
-    <ModalsContainer />
-    <SectionLogs />
+    <p class="text-center">History</p>
   </div>
 </template>

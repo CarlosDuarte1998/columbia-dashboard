@@ -23,11 +23,9 @@ const { open: openEdit, close: closeEdit } = useModal({
 });
 // Obtención de bitacora desde el almacén
 const registerStore = useRegisterStore();
-const registers = ref([]);
 
 onMounted(async () => {
-  await registerStore.getRegister()
-  registers.value = registerStore.registers
+  await registerStore.getRegister();
 });
 
 </script>

@@ -19,12 +19,8 @@ const { open: modalEditOpen, close: modalEditClose } = useModal({
 
 // Obtención de países y Competidores desde el almacén
 const competitorStore = useCompetitorStore();
-const competitors = ref([]);
-
-
 onMounted(async () => {
-  await competitorStore.getCompetitors()
-  competitors.value = competitorStore.competitors
+  await competitorStore.getCompetitors();
 });
 
 
@@ -67,7 +63,8 @@ const deleteCompetitor = async (id) => {
 
 </script>
 <template>
-  <div class="mt-8">
+  <div class="mt-8 p-4" style="width:80%; float:right; margin-right:10px">
+    <h1 class="font-bold text-2xl mb-2">Competidores</h1>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
       <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -80,17 +77,16 @@ const deleteCompetitor = async (id) => {
             <th scope="col" class=" px-4 py-3">Acciones</th>
           </tr>
         </thead>
-        <tbody v-for="competitor in competitors" :key="competitor.id">
+        <tbody v-for="count in competitorStore.competitors" :key="count.id">
           <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
             <td class="px-6 py-4">
               <div class="flex items-center text-black text-base font-semibold">
-                {{ competitor.name }}
+                {{ count.name }}
               </div>
             </td>
-            <td class="px-2 py-4 max-w-xs p-3">{{ competitor.instagram_biography }}</td>
-
+            <td class="px-2 py-4 max-w-xs p-3">{{ count.instagram_biography }}</td>
             <td>
-              {{ competitor.instagram_username }}
+              {{ count.instagram_username }}
             </td>
             <td class="px-6 py-4">
               <div class="flex items-center">
@@ -100,7 +96,9 @@ const deleteCompetitor = async (id) => {
             </td>
             <td class="px-6 py-4">
               <div class="flex items-center">
-                <span v-if="competitor.countries[0]">{{ competitor.countries[0].name}}</span>
+                  <span v-for="pais in count.countries" :key="pais.id">
+                      {{ pais.name }}
+                  </span>
               </div>
             </td>
             <td class="px-6 py-4">
@@ -115,7 +113,7 @@ const deleteCompetitor = async (id) => {
                 <span class="pr-3">
                   <font-awesome-icon icon="fa-solid fa-trash"
                     class="w-4 h-4  hover:text-black transition duration-150 cursor-pointer"
-                     @click="deleteCompetitor(competitor.id)"/></span>
+                     @click="deleteCompetitor(competitorStore.competitor)"/></span>
               </div>
             </td>
           </tr>
