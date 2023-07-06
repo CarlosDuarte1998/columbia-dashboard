@@ -1,10 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import HeaderDashboard from './HeaderDashboard.vue';
-import sectionCoupons from './sectionCoupons.vue';
-import sectionCompetitors from './sectionCompetitors.vue';
-import sectionLogs from './sectionLogs.vue';
-import sectionRegister from './sectionRegister.vue';
+import sectionRegister from './SectionRegister.vue';
 
 
 
@@ -23,7 +20,6 @@ let user = JSON.parse(localStorage.getItem('user'));
 <template>
   <div>
     <HeaderDashboard />
-
     <aside id="logo-sidebar"
       class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0"
       aria-label="Sidebar">
@@ -73,7 +69,7 @@ let user = JSON.parse(localStorage.getItem('user'));
         </ul>
       </div>
     </aside>
-    <div class="p-4 sm:ml-64">
+    <!--<div class="p-4 sm:ml-64">
       <div class="p-4 dark:border-gray-700 mt-14">
         <div class="grid gap-4 mb-4">
           <div class="" id="coupons" v-show="activeSection === 'coupons'">
@@ -90,7 +86,7 @@ let user = JSON.parse(localStorage.getItem('user'));
           </div>
         </div>
       </div>
-    </div>
+    </div>-->
   </div>
 </template>
 

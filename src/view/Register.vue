@@ -1,7 +1,8 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { ModalsContainer } from 'vue-final-modal'
-import NavbarDashboard from '../components/NavbarDashboard.vue'
+import NavbarDashboard from '../components/NavbarDashboard.vue';
+import SectionRegister from '../components/SectionRegister.vue';
 
 const token = ref('token');
 const user = ref('user');
@@ -18,6 +19,6 @@ onMounted(() => {
     <div v-if="user !== '' && token !== ''">
         <NavbarDashboard />
         <ModalsContainer />
-        <p>Registers</p>
+        <SectionRegister />
     </div>
 </template>
