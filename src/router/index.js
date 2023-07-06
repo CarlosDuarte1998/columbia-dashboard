@@ -2,8 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Login from '../view/LoginDash.vue'
 import CompetitorDash from '../view/CompetitorDash.vue'
 import Coupon from '../view/Coupon.vue'
-import Register from '../view/Coupon.vue'
-import History from '../view/Coupon.vue'
+import Register from '../view/Register.vue'
+import History from '../view/History.vue'
 
 // import {useAuthStore} from '../stores/auth_store.js';
 const router = createRouter({

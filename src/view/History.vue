@@ -18,6 +18,6 @@ onMounted(() => {
 <template>
   <div v-if="user !== '' && token !== ''">
     <NavbarDashboard />
-    <p class="text-center">History</p>
+    <SectionLogs />
   </div>
 </template>

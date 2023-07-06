@@ -18,8 +18,6 @@ const { open: openEdit, close: closeEdit } = useModal({
 // Obtención de bitacora desde el almacén
 
 const historyStore = useHistoriesStore();
-const histories = ref([]);
-
 onMounted(async () => {
   await historyStore.getHistories();
 });
@@ -67,36 +65,28 @@ const deleteHistory = async (id) => {
 
 </script>
 <template>
-  <div class="mt-8">
+  <div class="mt-8 p-4" style="width:80%; float:right; margin-right:10px">
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-      {{histories}}
       <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr class="pl-3">
             <th scope="col" class=" px-6 py-3">Competidor</th>
-            <th scope="col" class=" px-6 py-3">País</th>
             <th scope="col" class=" px-4 py-3">Distancia</th>
             <th scope="col" class="">time</th>
             <th scope="col" class="">Acciones</th>
           </tr>
         </thead>
-        <tbody v-for="history in histories" :key="history.id">
+        <tbody v-for="history in historyStore.histories" :key="history.id">
           <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
             <td class="px-6 py-4">
               <div class="flex items-center text-black text-base font-semibold">
                 {{ history.competitor.name }}
               </div>
             </td>
-            {{ history.competitor }}
-            <td class="px-3">{{ history.competitor.countries[0].name }}</td>
-            <td class="px-3">{{history.distance}} m</td>
-
-            <td>
-            {{ history.time }} horas
-            </td>
+            <td class="px-3">{{ history.distance}} m</td>
+            <td>{{ history.time }} horas</td>
             <td>
               <div class="font-medium flex">
-            
                 <span class="pr-3">
                   <font-awesome-icon icon="fa-solid fa-pencil"
                     class="w-4 h-4  hover:text-black transition duration-150 cursor-pointer"   @click="openEdit"/></span>
