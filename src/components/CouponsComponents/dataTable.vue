@@ -6,7 +6,6 @@ import { onMounted, ref } from 'vue';
 import Swal from 'sweetalert2/dist/sweetalert2';
 
 /* Funciones de los modales*/
-
 const { open: openEdit, close: closeEdit } = useModal({
   component: modalEdit,
   attrs: {
@@ -66,10 +65,8 @@ const deleteCoupon = async (id) => {
   });
 };
 </script>
-
 <template>
-  <div class="mt-8 p-4" style="width:80%; float:right; margin-right:10px">
-    <h1 class="font-bold text-2xl mb-2">Cupones</h1>
+  <div class="mt-2 p-4" >
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
       <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
         <tr class="pl-3">
@@ -80,7 +77,6 @@ const deleteCoupon = async (id) => {
           <th scope="col" class="px-6 py-3">Acciones</th>
         </tr>
       </thead>
-
       <!-- filas de la tabla -->
       <tbody v-for="coupon in couponsStore.coupons" :key="coupon.id">
         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">

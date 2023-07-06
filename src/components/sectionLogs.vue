@@ -25,7 +25,6 @@ const { open: openAdd, close: closeAdd } = useModal({
           <font-awesome-icon icon="fa-solid fa-plus" />
         </button>
       </div>
-      <p>HISTORY</p>
       <div class="mt-8">
         <dataTable />
       </div>

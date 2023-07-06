@@ -14,10 +14,10 @@ onMounted(() => {
 });
 
 </script>
-
 <template>
     <div v-if="user !== '' && token !== ''">
         <NavbarDashboard />
+        <ModalsContainer />
         <SectionCoupons />
     </div>
 </template>
