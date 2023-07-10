@@ -14,14 +14,13 @@ const { open: openAdd, close: closeAdd } = useModal({
 
 </script>
 <template>
-    <div class="mt-10">
-      <div class="flex w-full justify-start">
-        <button @click="openAdd" class="border border-black p-2 cursor-pointer  transition duration-200">
+    <div class="mt-8 p-4" style="width:80%; float:right;">
+      <h1 class="font-bold text-2xl mt-8">Registros</h1>
+      <div class="flex w-full justify-end">
+        <button @click="openAdd" class="border mt-1 mr-4 border-black p-2 cursor-pointer">
           <font-awesome-icon icon="fa-solid fa-plus" /> Nuevo registro
         </button>
       </div>
-      <div class="mt-8">
-        <dataTable />
-      </div>
+      <dataTable />
     </div>
 </template>

@@ -4,6 +4,7 @@ import modalDelete from './modalDelete.vue';
 import modalEdit from './modalEdit.vue';
 import {useRegisterStore} from '@/stores/register'
 import { ref, onMounted } from 'vue';
+import Swal from 'sweetalert2/dist/sweetalert2';
 
 const { open: openDelete, close: closeDelete } = useModal({
   component: modalDelete,
@@ -21,24 +22,52 @@ const { open: openEdit, close: closeEdit } = useModal({
     }
   },
 });
-// Obtención de bitacora desde el almacén
 const registerStore = useRegisterStore();
-
 onMounted(async () => {
   await registerStore.getRegister();
 });
 
+const deleteRegister = async (id) => {
+  Swal.fire({
+    title: 'Eliminar',
+    text: "¡No se podrá recuperar el dato seleccionado",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#4caf50',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Eliminar'
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      try {
+        await registerStore.deleteRegister(id);
+        Swal.fire(
+          '¡Eliminado!',
+          'El registro ha sido eliminado satisfactoriamente.',
+          'success'
+        ).then(() => {
+          registerStore.getRegister();
+        });
+      } catch (error) {
+        Swal.fire(
+          '¡Error!',
+          'El competidor no ha sido eliminado.',
+          'error'
+        );
+      }
+    }
+  });
+};
+
 </script>
 <template>
-  <div class="mt-8 p-4" style="width:80%; float:right; margin-right:10px">
-    <h1 class="font-bold text-2xl mb-2">Registros</h1>
+  <div class="mt-2 p-4">
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
       <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr class="pl-3">
             <th scope="col" class=" px-6 py-3">Nombre</th>
             <th scope="col" class=" px-4 py-3">Correo</th>
-            <th scope="col" class="">codigo</th>
+            <th scope="col" class="">Código</th>
             <th scope="col" class="">País</th>
             <th scope="col" class="">Acciones</th>
           </tr>
@@ -51,9 +80,7 @@ onMounted(async () => {
               </div>
             </td>
             <td class="px-3">{{ register.email }}</td>
-            <td>
-              <p class=" text-base font-semibold">cdjfjbdfj</p>
-            </td>
+            <td class="text-base font-semibold">{{ register.discountcode.code }}</td>
             <td>
               <span>{{ register.countries[0].name }}</span>
             </td>
@@ -67,7 +94,7 @@ onMounted(async () => {
                     class="w-4 h-4  hover:text-black transition duration-150 cursor-pointer" @click="openEdit"/></span>
                 <span class="pr-3">
                   <font-awesome-icon icon="fa-solid fa-trash"
-                    class="w-4 h-4  hover:text-black transition duration-150 cursor-pointer" @click="openDelete"/></span>
+                    class="w-4 h-4  hover:text-black transition duration-150 cursor-pointer" @click="deleteRegister(register)"/></span>
               </div>
             </td>
           </tr>

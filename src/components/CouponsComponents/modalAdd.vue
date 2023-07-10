@@ -89,10 +89,10 @@ const addCoupon = async () => {
             </div>
           </div>
           <div class="flex w-full justify-end items-center mt-8">
-            <span @click="emit('confirm')" class="bg-red-600 p-2 rounded-md cursor-pointer text-white">
+            <button @click="emit('confirm')" class="bg-red-600 p-2 rounded-md cursor-pointer text-white">
               Cancelar
-            </span>
-            <button @click.prevent="addCoupon" class="bg-green-600 ml-2 p-2 rounded-md text-white cursor-pointer">
+            </button>
+            <button @submit.prevent="addCoupon" class="bg-green-600 ml-2 p-2 rounded-md text-white cursor-pointer">
               Guardar
             </button>
           </div>
