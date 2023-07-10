@@ -13,7 +13,6 @@ export const useCompetitorStore = defineStore('competitors', {
       await axios.get('/competitors', { headers: { 'Authorization': `Bearer ${this.token}` } })
       .then(response => {
         this.competitors = response.data.data;
-        console.log(this.competitors);
       })
     },
     async addCompetitor(data) {
@@ -26,29 +25,22 @@ export const useCompetitorStore = defineStore('competitors', {
 
     }, { headers: { 'Authorization': `Bearer ${this.token}` } })
         .then(response => {
-            this.coupons.push(response.data.data);
-            console.log(response);
+            this.coupons = response.data.data;
         })
         .catch(error => {
             console.log(error);
         }
         );
     },
-    async updateCompetitor(data) {
-      console.log(data);
-    },
+    async updateCompetitor(data) {},
     async deleteCompetitor(id) {
       try {
         const response = await axios.delete(`/competitors/${id}`, {
           headers: { 'Authorization': `Bearer ${this.token}` },
         });
-
         this.competitors = this.competitors.filter((competitor) => competitor.id !== id);
-        console.log(response);
-        return response;
       } catch (error) {
         console.log(error);
-        throw error;
       }
     },
   },

@@ -19,20 +19,17 @@ export const useHistoriesStore = defineStore('histories', {
                 distance: data.distance,
             }, { headers: { 'Authorization': `Bearer ${this.token}` } })
                 .then(response => {
-                    this.histories.push(response.data.data);
-                    console.log(response);
+                    this.histories = response.data.data;
                 })
                 .catch(error => {
                     console.log(error);
                 }
-                );
+            );
         },
         async deleteHistory(id) {
-            console.log(id);
             await axios.delete(`/history/${id}`, { headers: { 'Authorization': `Bearer ${this.token}` } })
                 .then(response => {
                     this.histories = this.histories.filter(history => history.id !== id);
-                    console.log(response);
                 })
                 .catch(error => {
                     console.log(error);
@@ -52,12 +49,11 @@ export const useHistoriesStore = defineStore('histories', {
                         }
                         return history;
                     });
-                    console.log(response);
                 })
                 .catch(error => {
                     console.log(error);
                 }
-                );
+            );
         },
     }
 });

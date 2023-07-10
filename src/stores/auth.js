@@ -23,16 +23,25 @@ export const useAuthStore = defineStore('auth', {
         })
       },
       async authUser(){
-        await axios.post('/user-data', {
+        await axios.get('/auth/user', {
           headers: { 'Authorization': `Bearer ${this.token}` }}
-          
           )
         .then(response => {
           this.user_data = response.data.data;
         })
-        .error(err => {
+        .catch(err => {
           console.log(err);
         });
     },
+    async logout(){
+      await axios.get('/auth/logout', {
+        headers: { 'Authorization': `Bearer ${this.token}` }}
+      ) .then(response => {
+        this.token = '';
+        this.router.push('/');
+      }) .catch(err => {
+        console.log(err);
+      });
+    }
   }
 })

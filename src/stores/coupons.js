@@ -21,18 +21,16 @@ export const useCouponsStore = defineStore('coupons', {
                 status: data.status,
             }, { headers: { 'Authorization': `Bearer ${this.token}` } })
                 .then(response => {
-                    this.coupons.push(response.data.data);
-                    console.log(response);
+                    this.coupons = response.data.data;
                 })
                 .catch(error => {
                     console.log(error);
                 }
-                );
+            );
         },
         async deleteCoupon(id) {
             await axios.delete(`/discount-codes/${id}`, { headers: { 'Authorization': `Bearer ${this.token}` } })
                 .then(response => {
-                    console.log(response);
                     this.coupons = this.coupons.filter(coupon => coupon.id !== id);
                 })
                 .catch(error => {

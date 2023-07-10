@@ -1,20 +1,11 @@
 <script setup>
 import { reactive, onMounted } from "vue";
-import { useAuthStore } from "../stores/auth";
+import {useAuthStore} from '../stores/auth';
 
 const usuario = useAuthStore();
 const formUser = reactive({
   email: '',
   password: '',
-});
-
-
-
-onMounted(() => {
-  
-  if (localStorage.getItem('token') && localStorage.getItem('user')) {
-  window.location.href = '/';
-}
 });
 
 

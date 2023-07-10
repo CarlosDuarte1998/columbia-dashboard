@@ -4,8 +4,9 @@ import CompetitorDash from '../view/CompetitorDash.vue'
 import Coupon from '../view/Coupon.vue'
 import Register from '../view/Register.vue'
 import History from '../view/History.vue'
+import {useAuthStore} from '../stores/auth.js';
 
-// import {useAuthStore} from '../stores/auth_store.js';
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -22,7 +23,7 @@ const router = createRouter({
       name: 'competitor',
       component: CompetitorDash,
       meta: {
-        requireAuth: false
+        requireAuth: true
       }
     },
     {
@@ -30,7 +31,7 @@ const router = createRouter({
       name: 'coupon',
       component: Coupon,
       meta: {
-        requireAuth: false
+        requireAuth: true
       }
     },
     {
@@ -38,7 +39,7 @@ const router = createRouter({
       name: 'register',
       component: Register,
       meta: {
-        requireAuth: false
+        requireAuth: true
       }
     },
     {
@@ -46,18 +47,19 @@ const router = createRouter({
       name: 'history',
       component: History,
       meta: {
-        requireAuth: false
+        requireAuth: true
       }
     },
   ]
 })
 
-// router.beforeEach(async(to, from, next) => {
-//   const auth = useAuthStore();
-//   if(to.meta.requireAuth && auth.token == null){
-//     next({ name: 'login' })
-//   } else {
-//     next()
-//   }
-// });
+router.beforeEach(async(to, from, next) => {
+  const auth = useAuthStore();
+  console.log(auth.token);
+  if(to.meta.requireAuth && auth.token == null){
+    next({ name: 'login' })
+  } else {
+     next()
+  }
+});
 export default router

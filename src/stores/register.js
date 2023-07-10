@@ -21,8 +21,7 @@ export const useRegisterStore = defineStore('registers', {
                     email: data.email,
                 });
                 
-                this.registers.push(response.data.data);
-                console.log(response);
+                this.registers = response.data.data;
             } catch (error) {
                 console.log(error);
             }

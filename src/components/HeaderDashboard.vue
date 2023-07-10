@@ -1,9 +1,11 @@
 <script setup>
-const logout = () => {
-  localStorage.removeItem("token");
-  localStorage.removeItem("user");
-  window.location.href = "/login";
-};
+import { reactive, onMounted } from "vue";
+import {useAuthStore} from '../stores/auth';
+
+  const auth = useAuthStore();
+  onMounted(async () => {
+    await auth.authUser();
+  });
 </script>
 <template>
     <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200">
@@ -40,13 +42,12 @@ const logout = () => {
           <div class="flex items-center ml-3">
             <div>
               <button
-              @click="logout"
+                @click="auth.logout()"
                 type="button"
                 class="flex text-sm justify-center items-center hover:text-white hover:bg-black p-2 border border-black transition duration-100"
                 aria-expanded="false"
               >
                 <span class="sr-only">Open user menu</span>
-                
                 <font-awesome-icon icon="fa-solid fa-lock"  class="w-6 h-4 mr-1 hover:text-white"/>
                 Cerrar Sesión
               </button>

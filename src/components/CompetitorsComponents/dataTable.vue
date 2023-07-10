@@ -5,7 +5,6 @@ import { ref, onMounted } from 'vue';
 import { useCompetitorStore } from '@/stores/competitor';
 import Swal from 'sweetalert2/dist/sweetalert2';
 
-
 /* Funcion de de apertura de los modales */
 const { open: modalEditOpen, close: modalEditClose } = useModal({
   component: modalEdit,
