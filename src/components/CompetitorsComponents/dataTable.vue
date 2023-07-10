@@ -73,6 +73,7 @@ const deleteCompetitor = async (id) => {
             <th scope="col" class="">Instagram</th>
             <th scope="col" class=" px-4 py-3">Foto de perfil</th>
             <th scope="col" class=" px-4 py-3">País</th>
+            <th scope="col" class=" px-4 py-3">Reto</th>
             <th scope="col" class=" px-4 py-3">Acciones</th>
           </tr>
         </thead>
@@ -89,8 +90,9 @@ const deleteCompetitor = async (id) => {
             </td>
             <td class="px-6 py-4">
               <div class="flex items-center">
-                <img src="https://columbia-frontend.vercel.app/assets/perfile-529cc96e.png" class=" w-16 h-16 " alt=""/>
-                <!-- <img :src="competitor.images[0].url" class=" w-16 h-16 " alt=""/> -->
+                <span v-for="img in count.images" :key="img.id">
+                  <img :src="img.url" class=" w-16 h-16 " alt=""/>
+                </span>
               </div>
             </td>
             <td class="px-6 py-4">
@@ -100,6 +102,7 @@ const deleteCompetitor = async (id) => {
                   </span>
               </div>
             </td>
+            <td>{{count.challenge}}</td>
             <td class="px-6 py-4">
               <div class="font-medium flex">
                 <span class="pr-3">
