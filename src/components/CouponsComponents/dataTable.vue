@@ -5,7 +5,6 @@ import { useCouponsStore } from '@/stores/coupons'
 import { onMounted, ref } from 'vue';
 import Swal from 'sweetalert2/dist/sweetalert2';
 
-/* Funciones de los modales*/
 const { open: openEdit, close: closeEdit } = useModal({
   component: modalEdit,
   attrs: {
@@ -17,17 +16,12 @@ const { open: openEdit, close: closeEdit } = useModal({
   },
 });
 
-
-/* Obtención de datos del store */
 const couponsStore = useCouponsStore();
-
 const getCoupons = async () => {
   await couponsStore.getCoupons();
 };
 
 onMounted(getCoupons);
-
-/* Eliminación de cupones */
 const deleteCoupon = async (id) => {
   const swalWithBootstrapButtons = Swal.mixin({
     customClass: {
@@ -38,8 +32,8 @@ const deleteCoupon = async (id) => {
   });
 
   swalWithBootstrapButtons.fire({
-    title: '¿Estás seguro?',
-    text: "¡No podrás revertir esto!",
+    title: 'Eliminar',
+    text: "¡No se podrá recuperar el dato seleccionado",
     icon: 'warning',
     showCancelButton: true,
     confirmButtonText: 'Borrar',
@@ -48,11 +42,10 @@ const deleteCoupon = async (id) => {
   }).then((result) => {
     if (result.isConfirmed) {
       swalWithBootstrapButtons.fire(
-        '¡Borrado!',
-        'Su registro ha sido borrado.',
+        '¡Eliminado!',
+        'El cupón ha sido eliminado satisfactoriamente.',
         'success'
       );
-
       couponsStore.deleteCoupon(id);
       getCoupons();
     } else if (result.dismiss === Swal.DismissReason.cancel) {
@@ -77,7 +70,6 @@ const deleteCoupon = async (id) => {
           <th scope="col" class="px-6 py-3">Acciones</th>
         </tr>
       </thead>
-      <!-- filas de la tabla -->
       <tbody v-for="coupon in couponsStore.coupons" :key="coupon.id">
         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
           <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">

@@ -36,7 +36,7 @@ const deleteCompetitor = async (id) => {
         await competitorStore.deleteCompetitor(id);
         Swal.fire(
           '¡Eliminado!',
-          'El competidor ha sido eliminado.',
+          'El competidor ha sido eliminado satisfactoriamente.',
           'success'
         ).then(() => {
           competitorStore.getCompetitors();

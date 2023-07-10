@@ -55,7 +55,6 @@ const router = createRouter({
 
 router.beforeEach(async(to, from, next) => {
   const auth = useAuthStore();
-  console.log(to.meta.requireAuth && auth.token == null);
   if(to.meta.requireAuth && auth.token == null){
     next({ name: 'login' })
   } else {

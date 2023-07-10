@@ -5,16 +5,12 @@ import { useCountryStore } from '@/stores/country'
 import Swal from 'sweetalert2/dist/sweetalert2';
 import { useCouponsStore } from '@/stores/coupons'
 
-defineProps({});
 
 const emit = defineEmits(['confirm']);
 let code = ref('');  
 let startFormatted = '';
 let endFormatted = '';
 let status = ref('');  
-
-
-// Obtencion de datos de fechas*
 
 const dateRange = ref({ start: new Date(), end: new Date() });
 const handleDate = (modelData, property) => {
@@ -25,10 +21,6 @@ const handleDate = (modelData, property) => {
   endFormatted = endDate.toISOString().replace(/T/, ' ').replace(/\..+/, '');
 };
 
-
-
-// Obtención de países desde el almacén
-
 const countryStore = useCountryStore();
 const countries = ref([]);
 onMounted(async () => {
@@ -37,9 +29,6 @@ onMounted(async () => {
   handleDate(dateRange.value.start, 'start');
   handleDate(dateRange.value.end, 'end');
 });
-
-
-// Envios de datos de cupones desde al almacén
 
 const storeCoupons = useCouponsStore();
 const addCoupon = async () => {
@@ -52,11 +41,11 @@ const addCoupon = async () => {
     });
     emit('confirm');
     Swal.fire({
-      position: 'top-end',
+      position: 'center',
       icon: 'success',
-      title: 'Your work has been saved',
+      title: 'Cupón guardado correctamente',
       showConfirmButton: false,
-      timer: 1500
+      timer: 2500
     })
   } catch (error) {
     console.log('Error al agregar el cupón:', error);
@@ -76,8 +65,7 @@ const addCoupon = async () => {
               <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Código del cupón
               </label>
               <input type="text" name="code" id="code" v-model="code"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-                placeholder="BETHEGOAT2023" required="" />
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
             </div>
             <div class="w-full">
               <label for="brand" class="block mb-2 text-sm font-medium text-gray-900">Fecha de inicio</label>
@@ -89,16 +77,15 @@ const addCoupon = async () => {
               <VueDatePicker :teleport="true" teleport-center :model-value="dateRange.end" time-picker-inline
                 :is-24="false" @update:model-value="modelData => handleDate(modelData, 'end')" />
             </div>
-            <div>
+            <div class="w-full">
               <label for="status" class="block mb-2 text-sm font-medium text-gray-900">Estado</label>
-            <div class="flex items-center">
-              <select id="status"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-1/2 p-2.5 mr-4" required v-model="status" >
-                <option selected="" disabled>Seleciona el estado</option>
-                <option value="Activo">Activo</option>
-                <option value="Inactivo">Inactivo</option>
-              </select>
-            </div>
+              <div class="flex items-center">
+                <select v-model="status" class="bg-gray-50 border w-full border-gray-300 text-gray-900 text-sm rounded-lg block w-1/2 p-2.5 mr-4">
+                  <option selected="" disabled>Seleciona el estado</option>
+                  <option value="Activo">Activo</option>
+                  <option value="Inactivo">Inactivo</option>
+                </select>
+              </div>
             </div>
           </div>
           <div class="flex w-full justify-end items-center mt-8">
