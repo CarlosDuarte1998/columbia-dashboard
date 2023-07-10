@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Login from '../view/LoginDash.vue'
+import Login from '../view/TheLogin.vue'
 import CompetitorDash from '../view/CompetitorDash.vue'
 import Coupon from '../view/Coupon.vue'
 import Register from '../view/Register.vue'
@@ -55,7 +55,7 @@ const router = createRouter({
 
 router.beforeEach(async(to, from, next) => {
   const auth = useAuthStore();
-  console.log(auth.token);
+  console.log(to.meta.requireAuth && auth.token == null);
   if(to.meta.requireAuth && auth.token == null){
     next({ name: 'login' })
   } else {

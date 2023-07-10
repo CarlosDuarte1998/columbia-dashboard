@@ -5,7 +5,6 @@ import { ref, onMounted } from 'vue';
 import { useCompetitorStore } from '@/stores/competitor';
 import Swal from 'sweetalert2/dist/sweetalert2';
 
-/* Funcion de de apertura de los modales */
 const { open: modalEditOpen, close: modalEditClose } = useModal({
   component: modalEdit,
   attrs: {
@@ -16,24 +15,21 @@ const { open: modalEditOpen, close: modalEditClose } = useModal({
 });
 
 
-// Obtención de países y Competidores desde el almacén
 const competitorStore = useCompetitorStore();
 onMounted(async () => {
   await competitorStore.getCompetitors();
 });
 
 
-//Eliminar competidor y validacion de la accion
-
 const deleteCompetitor = async (id) => {
   Swal.fire({
-    title: '¿Estás seguro?',
-    text: "¡No podrás revertir esto!",
+    title: 'Eliminar',
+    text: "¡No se podrá recuperar el dato seleccionado",
     icon: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#4caf50',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Sí, bórralo'
+    confirmButtonText: 'Eliminar'
   }).then(async (result) => {
     if (result.isConfirmed) {
       try {
@@ -43,10 +39,7 @@ const deleteCompetitor = async (id) => {
           'El competidor ha sido eliminado.',
           'success'
         ).then(() => {
-          // Actualizar los registros después de eliminar el competidor
-          competitorStore.getCompetitors().then(() => {
-            competitors.value = competitorStore.competitors;
-          });
+          competitorStore.getCompetitors();
         });
       } catch (error) {
         Swal.fire(
@@ -58,7 +51,6 @@ const deleteCompetitor = async (id) => {
     }
   });
 };
-
 
 </script>
 <template>
@@ -114,7 +106,8 @@ const deleteCompetitor = async (id) => {
                 <span class="pr-3">
                   <font-awesome-icon icon="fa-solid fa-trash"
                     class="w-4 h-4  hover:text-black transition duration-150 cursor-pointer"
-                     @click="deleteCompetitor(competitorStore.competitor)"/></span>
+                    @click="deleteCompetitor(count)"/>
+                </span>
               </div>
             </td>
           </tr>

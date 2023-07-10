@@ -6,7 +6,8 @@ export const useAuthStore = defineStore('auth', {
   state: () => ({
     user: [],
     token: '',
-    user_data: ''
+    user_data: '',
+    errs: ''
   }),
     actions: {
       async login(data){
@@ -19,7 +20,7 @@ export const useAuthStore = defineStore('auth', {
           this.router.push('/competitor');
         })
         .catch(err => {
-          console.log(err);
+          this.errs = err.response.data.errors;
         })
       },
       async authUser(){

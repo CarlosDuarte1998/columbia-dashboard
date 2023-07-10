@@ -16,12 +16,14 @@ export const useCompetitorStore = defineStore('competitors', {
       })
     },
     async addCompetitor(data) {
+      console.log(data);
       await axios.post('/competitors/', {
         name: data.name,
         instagram_username: data.instagram_username,
         instagram_biography: data.instagram_biography,
         country_id: data.country_id,
         image: data.image,
+        challenge: data.challenge
 
     }, { headers: { 'Authorization': `Bearer ${this.token}` } })
         .then(response => {
@@ -32,17 +34,16 @@ export const useCompetitorStore = defineStore('competitors', {
         }
         );
     },
-    async updateCompetitor(data) {},
-    async deleteCompetitor(id) {
-      try {
-        const response = await axios.delete(`/competitors/${id}`, {
+    async deleteCompetitor(data) {
+        await axios.delete('/competitors/' + data.id, {
           headers: { 'Authorization': `Bearer ${this.token}` },
+        }) .then(response => {
+          this.getCompetitors();
+          console.log(response.data.data);
+        }) .catch(error => {
+          console.log(error);
         });
-        this.competitors = this.competitors.filter((competitor) => competitor.id !== id);
-      } catch (error) {
-        console.log(error);
       }
-    },
   },
 });
 
