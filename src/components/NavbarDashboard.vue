@@ -41,21 +41,20 @@ let user = JSON.parse(localStorage.getItem('user'));
               <span class="flex-1 ml-3 whitespace-nowrap">Competidores</span>
             </router-link>
           </li>
-
-          <li>
-            <router-link active-class="active" to="/history"
-              class="flex items-center transition duration-75 p-2 text-gray-600 rounded-lg hover:text-white hover:bg-black"
-              >
-              <font-awesome-icon :icon="['fas', 'compass']" class="w-5 h-5" />
-              <span class="flex-1 ml-3 whitespace-nowrap">Bitacoras</span>
-            </router-link>
-          </li>
           <li>
             <router-link active-class="active" to="/registers"
               class="flex items-center transition duration-75 p-2 text-gray-600 rounded-lg hover:text-white hover:bg-black"
               >
               <font-awesome-icon icon="fa-solid fa-clipboard-check" class="w-5 h-5" />
               <span class="flex-1 ml-3 whitespace-nowrap">Registros</span>
+            </router-link>
+          </li>
+          <li>
+            <router-link active-class="active" to="/history"
+              class="flex items-center transition duration-75 p-2 text-gray-600 rounded-lg hover:text-white hover:bg-black"
+              >
+              <font-awesome-icon :icon="['fas', 'compass']" class="w-5 h-5" />
+              <span class="flex-1 ml-3 whitespace-nowrap">Bitacoras</span>
             </router-link>
           </li>
         </ul>

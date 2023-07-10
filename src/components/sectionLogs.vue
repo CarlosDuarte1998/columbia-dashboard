@@ -16,18 +16,14 @@ const { open: openAdd, close: closeAdd } = useModal({
 
 </script>
 <template>
-  <div>
-    <div class="mt-10">
-      <div class="flex w-full justify-start">
+    <div class="mt-8 p-4" style="width:80%; float:right;">
+      <h1 class="font-bold text-2xl mt-8">Historial</h1>
+      <div class="flex w-full justify-end">
         <button @click="openAdd"
-          class="border border-black p-2 cursor-pointer hover:bg-black hover:text-white transition duration-200">
-          Nuevo registro
-          <font-awesome-icon icon="fa-solid fa-plus" />
+          class="border mr-4 border-black p-2 cursor-pointer">
+          <font-awesome-icon icon="fa-solid fa-plus" /> Nuevo historial
         </button>
       </div>
-      <div class="mt-8">
-        <dataTable />
-      </div>
+      <dataTable />
     </div>
-  </div>
 </template>

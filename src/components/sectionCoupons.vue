@@ -17,8 +17,7 @@ const { open, close } = useModal({
       <h1 class="font-bold text-2xl mt-8">Cupones</h1>
       <div class="flex w-full justify-end">
         <button @click="open" class="border mt-1 mr-4 border-black p-2 cursor-pointer">
-            Nuevo cupón
-          <font-awesome-icon icon="fa-solid fa-plus" />
+          <font-awesome-icon icon="fa-solid fa-plus" /> Nuevo cupón
         </button>
       </div>
       <dataTable />

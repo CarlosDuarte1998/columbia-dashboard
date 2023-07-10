@@ -102,7 +102,7 @@ const deleteCompetitor = async (id) => {
                   </span>
               </div>
             </td>
-            <td>{{count.challenge}}</td>
+            <td>{{count.challenge}} km</td>
             <td class="px-6 py-4">
               <div class="font-medium flex">
                 <span class="pr-3">
