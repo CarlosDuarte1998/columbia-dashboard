@@ -57,7 +57,7 @@ const deleteCompetitor = async (id) => {
   <div class="mt-2 p-4">
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
       <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <thead class="text-xs border-b text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr class="pl-3">
             <th scope="col" class=" px-6 py-3">Nombre</th>
             <th scope="col" class=" px-4 py-3">Biografía</th>

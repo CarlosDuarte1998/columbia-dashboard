@@ -17,10 +17,17 @@ const { open: openAdd, close: closeAdd } = useModal({
     <div class="mt-8 p-4" style="width:80%; float:right;">
       <h1 class="font-bold text-2xl mt-8">Registros</h1>
       <div class="flex w-full justify-end">
-        <button @click="openAdd" class="border mt-1 mr-4 border-black p-2 cursor-pointer">
+        <button @click="openAdd" class="border mt-1 mr-4 border-black p-2 cursor-pointer butt">
           <font-awesome-icon icon="fa-solid fa-plus" /> Nuevo registro
         </button>
       </div>
       <dataTable />
     </div>
 </template>
+<style>
+  .butt:hover{
+    background: #000000;
+    color: white;
+    transition: all 0.5s;
+  }
+</style>

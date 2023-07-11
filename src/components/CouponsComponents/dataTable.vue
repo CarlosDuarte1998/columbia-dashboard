@@ -32,11 +32,11 @@ const deleteCoupon = async (id) => {
   });
 
   swalWithBootstrapButtons.fire({
-    title: 'Eliminar',
-    text: "¡No se podrá recuperar el dato seleccionado",
+    title: '¿Seguro que desea eliminar?',
+    text: "¡No se podrá recuperar el dato seleccionado!",
     icon: 'warning',
     showCancelButton: true,
-    confirmButtonText: 'Borrar',
+    confirmButtonText: 'Eliminar',
     cancelButtonText: 'Cancelar',
     reverseButtons: true
   }).then((result) => {
@@ -59,9 +59,10 @@ const deleteCoupon = async (id) => {
 };
 </script>
 <template>
-  <div class="mt-2 p-4" >
-    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+  <div class="mt-2 p-4">
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs border-b text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
         <tr class="pl-3">
           <th scope="col" class="px-6 py-3">Código</th>
           <th scope="col" class="px-6 py-3">Fecha de inicio</th>
@@ -98,5 +99,6 @@ const deleteCoupon = async (id) => {
         </tr>
       </tbody>
     </table>
+    </div>
   </div>
 </template>

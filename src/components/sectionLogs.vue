@@ -20,10 +20,17 @@ const { open: openAdd, close: closeAdd } = useModal({
       <h1 class="font-bold text-2xl mt-8">Historial</h1>
       <div class="flex w-full justify-end">
         <button @click="openAdd"
-          class="border mr-4 border-black p-2 cursor-pointer">
+          class="border mr-4 border-black p-2 cursor-pointer butt">
           <font-awesome-icon icon="fa-solid fa-plus" /> Nuevo historial
         </button>
       </div>
       <dataTable />
     </div>
 </template>
+<style>
+  .butt:hover{
+    background: #000000;
+    color: white;
+    transition: all 0.5s;
+  }
+</style>

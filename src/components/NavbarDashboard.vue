@@ -21,7 +21,7 @@ let user = JSON.parse(localStorage.getItem('user'));
             <a 
               class="flex items-center p-2 mb-4 transition duration-75 text-black rounded-lg"
               >
-              <font-awesome-icon icon="fa-solid fa-circle-user" class="flex-shrink-0 w-6 h-6"/>
+              <!--<font-awesome-icon icon="fa-solid fa-circle-user" class="flex-shrink-0 w-6 h-6"/>-->
               <span class="ml-3 span-user-name">{{ user.name}}</span>
             </a>
           </li>

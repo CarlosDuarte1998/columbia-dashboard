@@ -59,7 +59,7 @@ const addCoupon = async () => {
     <section class="bg-white 0">
       <div class="">
         <h2 class="mb-4 text-2xl font-gerttb text-gray-900">Añadir nuevo cupon</h2>
-        <form action="#">
+        <form @submit.prevent="addCoupon">
           <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
             <div class="sm:col-span-2">
               <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Código del cupón
@@ -92,7 +92,7 @@ const addCoupon = async () => {
             <button @click="emit('confirm')" class="bg-red-600 p-2 rounded-md cursor-pointer text-white">
               Cancelar
             </button>
-            <button @submit.prevent="addCoupon" class="bg-green-600 ml-2 p-2 rounded-md text-white cursor-pointer">
+            <button class="bg-green-600 ml-2 p-2 rounded-md text-white cursor-pointer">
               Guardar
             </button>
           </div>
