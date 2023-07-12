@@ -25,24 +25,23 @@ onMounted(async () => {
 // Se realiza la pregunta con swal para confirmar la eliminación de la bitacora y si confirma se envia el id al stores
 
 const deleteHistory = async (id) => {
-  console.log(id)
   const result = await Swal.fire({
-    title: '¿Estás seguro?',
-    text: "¡No podrás revertir esto!",
+    title: '¿Seguro que desea eliminar?',
+    text: "¡No se podrá recuperar el dato seleccionado!",
     icon: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#449d48',
     cancelButtonColor: '#d33',
-    confirmButtonText: '¡Sí, bórralo!',
-    cancelButtonText: 'Cancelar'
+    confirmButtonText: 'Eliminar',
+    cancelButtonText: 'Cancelar',
   })
   if (result.isConfirmed) {
   const reponse = await historyStore.deleteHistory(id)
     histories.value = historyStore.histories
    if(reponse){
     Swal.fire(
-      '¡Eliminado!',
-      'Tu archivo ha sido eliminado.',
+        '¡Eliminado!',
+        'El dato del historial ha sido eliminado satisfactoriamente.',
       'success'
     )
    }else{

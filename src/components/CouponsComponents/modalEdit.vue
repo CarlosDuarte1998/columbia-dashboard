@@ -7,8 +7,6 @@ defineProps({
     title: String,
 });
 const emit = defineEmits(['confirm']);
-
-/*Obtencion de datos de fechas*/
 const dateRange = ref({ start: new Date(), end: new Date() });
 const handleDate = (modelData, property) => {
     const options = {
@@ -42,15 +40,14 @@ onMounted(async () => {
         content-transition="vfm-fade" :click-to-close="false">
         <section class="bg-white 0">
             <div class="">
-                <h2 class="mb-4 text-2xl font-gerttb text-gray-900">Editar nuevo cupon</h2>
+                <h2 class="mb-4 text-2xl font-gerttb text-gray-900">Editar cupón</h2>
                 <form action="#">
                     <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
                         <div class="sm:col-span-2">
                             <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Código del cupón
                             </label>
                             <input type="text" name="name" id="name"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
-                                placeholder="BETHEGOAT2023" required="" />
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
                         </div>
                         <div class="w-full">
                             <label for="brand" class="block mb-2 text-sm font-medium text-gray-900">Fecha de inicio</label>

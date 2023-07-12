@@ -37,6 +37,16 @@ export const useCouponsStore = defineStore('coupons', {
                     console.log(error);
                 });
         },
+        editData(data) {
+            let edit = this.coupons.find((el) => el.id == data.id)
+            console.log(edit);
+            if(edit){
+                this.orderdetailsForm.order_id = edit.order_id;
+                this.orderdetailsForm.quantity = edit.quantity;
+                this.orderdetailsForm.description = edit.description;
+                this.orderdetailsForm.unit_price = edit.unit_price;
+            }
+        },
         async updateCoupon(data) {
             await axios.put(`/discount-codes/${data.id}`, {
                 code: data.code,

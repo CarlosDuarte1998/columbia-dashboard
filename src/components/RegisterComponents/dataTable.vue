@@ -69,7 +69,7 @@ const deleteRegister = async (id) => {
             <th scope="col" class=" px-4 py-3">Correo</th>
             <th scope="col" class="">Código</th>
             <th scope="col" class="">País</th>
-            <th scope="col" class="">Acciones</th>
+            <!--<th scope="col" class="">Acciones</th>-->
           </tr>
         </thead>
         <tbody v-for="register in registerStore.registers" :key="register.id">
@@ -84,7 +84,7 @@ const deleteRegister = async (id) => {
             <td>
               <span>{{ register.countries[0].name }}</span>
             </td>
-            <td>
+            <!--<td>
               <div class="font-medium flex">
                 <span class="pr-3">
                   <font-awesome-icon icon="fa-solid fa-eye"
@@ -96,7 +96,7 @@ const deleteRegister = async (id) => {
                   <font-awesome-icon icon="fa-solid fa-trash"
                     class="w-4 h-4  hover:text-black transition duration-150 cursor-pointer" @click="deleteRegister(register)"/></span>
               </div>
-            </td>
+            </td>-->
           </tr>
         </tbody>
       </table>
