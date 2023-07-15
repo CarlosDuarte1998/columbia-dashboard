@@ -6,6 +6,12 @@ export const useCouponsStore = defineStore('coupons', {
     state: () => ({
         coupons: [],
         token: JSON.parse(localStorage.getItem('token')),
+        formCoupon: {
+            code: '',
+            startFormatted: '',
+            endFormatted: '',
+            status: ''  
+        }
     }),
     actions: {
         async getCoupons() {
@@ -14,6 +20,7 @@ export const useCouponsStore = defineStore('coupons', {
 
         },
         async addCoupon(data) {
+            console.log(data);
             await axios.post('/discount-codes', {
                 code: data.code,
                 start_date: data.start_date,
@@ -37,16 +44,6 @@ export const useCouponsStore = defineStore('coupons', {
                     console.log(error);
                 });
         },
-        editData(data) {
-            let edit = this.coupons.find((el) => el.id == data.id)
-            console.log(edit);
-            if(edit){
-                this.orderdetailsForm.order_id = edit.order_id;
-                this.orderdetailsForm.quantity = edit.quantity;
-                this.orderdetailsForm.description = edit.description;
-                this.orderdetailsForm.unit_price = edit.unit_price;
-            }
-        },
         async updateCoupon(data) {
             await axios.put(`/discount-codes/${data.id}`, {
                 code: data.code,
@@ -65,6 +62,15 @@ export const useCouponsStore = defineStore('coupons', {
                 .catch(error => {
                     console.log(error);
                 });
+        },
+        editData(data) {
+            let edit = this.budgets.find((el) => el.id == data.id)
+            if(edit){
+                this.formCoupon.code = edit.code;
+                this.formCoupon.start_date = edit.start_date;
+                this.formCoupon.end_date = edit.end_date;
+                this.formCoupon.status = edit.status;
+            }
         },
     }
 })

@@ -2,12 +2,15 @@
 import { VueFinalModal } from 'vue-final-modal'
 import { defineProps, defineEmits, ref, onMounted } from 'vue'
 import { useCountryStore } from '@/stores/country'
+import { useCouponsStore } from '@/stores/coupons'
+
 
 defineProps({
     title: String,
 });
 const emit = defineEmits(['confirm']);
 const dateRange = ref({ start: new Date(), end: new Date() });
+const storeCoupons = useCouponsStore();
 const handleDate = (modelData, property) => {
     const options = {
         day: 'numeric',
@@ -21,14 +24,9 @@ const handleDate = (modelData, property) => {
     console.log(dateRange.value[property].toLocaleDateString('es-ES', options));
 };
 
-
-// Obtención de países desde el almacén
 const countryStore = useCountryStore();
-const countries = ref([]);
-
 onMounted(async () => {
     await countryStore.getCountries();
-    countries.value = countryStore.countries;
     
 });
 
@@ -46,7 +44,7 @@ onMounted(async () => {
                         <div class="sm:col-span-2">
                             <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Código del cupón
                             </label>
-                            <input type="text" name="name" id="name"
+                            <input type="text" v-model="storeCoupons.formCoupon.code"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
                         </div>
                         <div class="w-full">
@@ -60,14 +58,14 @@ onMounted(async () => {
                             <VueDatePicker :teleport="true" teleport-center :model-value="dateRange.end" time-picker-inline
                                 :is-24="false" @update:model-value="modelData => handleDate(modelData, 'end')" />
                         </div>
-                        <div>
+                        <!--<div>
                             <label for="country" class="block mb-2 text-sm font-medium text-gray-900">Pais</label>
-                            <select id="country"
+                            <select v-model="storeCoupons.formCoupon.status"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                                 <option selected="" disabled>Seleciona el país</option>
-                                <option v-for="country in countries" :key="country.id">{{ country.name }}</option>
+                                <option v-for="country in countryStore.countries" :key="country.id">{{ country.name }}</option>
                             </select>
-                        </div>
+                        </div>-->
                         <div>
                             <label for="status" class="block mb-2 text-sm font-medium text-gray-900">Estado</label>
                             <select id="status"

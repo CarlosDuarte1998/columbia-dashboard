@@ -5,12 +5,10 @@ import { useCountryStore } from '@/stores/country'
 import Swal from 'sweetalert2/dist/sweetalert2';
 import { useCouponsStore } from '@/stores/coupons'
 
-
+const storeCoupons = useCouponsStore();
 const emit = defineEmits(['confirm']);
-let code = ref('');  
 let startFormatted = '';
 let endFormatted = '';
-let status = ref('');  
 
 const dateRange = ref({ start: new Date(), end: new Date() });
 const handleDate = (modelData, property) => {
@@ -21,24 +19,13 @@ const handleDate = (modelData, property) => {
   endFormatted = endDate.toISOString().replace(/T/, ' ').replace(/\..+/, '');
 };
 
-const countryStore = useCountryStore();
-const countries = ref([]);
 onMounted(async () => {
-  await countryStore.getCountries();
-  countries.value = countryStore.countries;
   handleDate(dateRange.value.start, 'start');
   handleDate(dateRange.value.end, 'end');
 });
-
-const storeCoupons = useCouponsStore();
 const addCoupon = async () => {
   try {
-    await storeCoupons.addCoupon({
-      code: code.value,
-      start_date: startFormatted,
-      end_date: endFormatted,
-      status: status.value,
-    });
+    await storeCoupons.addCoupon(data);
     emit('confirm');
     Swal.fire({
       position: 'center',
@@ -59,12 +46,12 @@ const addCoupon = async () => {
     <section class="bg-white 0">
       <div class="">
         <h2 class="mb-4 text-2xl font-gerttb text-gray-900">Añadir nuevo cupon</h2>
-        <form @submit.prevent="addCoupon">
+        <form @submit.prevent="storeCoupons.addCoupon(storeCoupons.formCoupon)">
           <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
             <div class="sm:col-span-2">
               <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Código del cupón
               </label>
-              <input type="text" name="code" id="code" v-model="code"
+              <input type="text" name="code" id="code" v-model="storeCoupons.formCoupon.code"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
             </div>
             <div class="w-full">
@@ -80,7 +67,7 @@ const addCoupon = async () => {
             <div class="w-full">
               <label for="status" class="block mb-2 text-sm font-medium text-gray-900">Estado</label>
               <div class="flex items-center">
-                <select v-model="status" class="bg-gray-50 border w-full border-gray-300 text-gray-900 text-sm rounded-lg block w-1/2 p-2.5 mr-4">
+                <select v-model="storeCoupons.formCoupon.status" class="bg-gray-50 border w-full border-gray-300 text-gray-900 text-sm rounded-lg block w-1/2 p-2.5 mr-4">
                   <option selected="" disabled>Seleciona el estado</option>
                   <option value="Activo">Activo</option>
                   <option value="Inactivo">Inactivo</option>
@@ -130,3 +117,4 @@ const addCoupon = async () => {
   background: #000;
 }
 </style>
+
