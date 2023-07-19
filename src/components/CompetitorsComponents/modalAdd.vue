@@ -7,12 +7,14 @@ import Swal from 'sweetalert2/dist/sweetalert2'
 
 defineProps({})
 const emit = defineEmits(['confirm'])
-let name = ref('')
-let instagram = ref('')
-let country = ref('')
-let biography = ref('')
-let challenge = ref('')
 let image = null
+
+const countryStore = useCountryStore()
+const competitorStore = useCompetitorStore()
+onMounted(async () => {
+  await countryStore.getCountries();
+})
+
 
 const selectedImage = ref('./src/assets/img/perfile.png')
 const handleImageChange = (event) => {
@@ -29,30 +31,7 @@ const handleImageChange = (event) => {
   }
 }
 
-const countryStore = useCountryStore()
-const countries = ref([])
-onMounted(async () => {
-  await countryStore.getCountries()
-  countries.value = countryStore.countries
-})
 
-const competitorStore = useCompetitorStore()
-const submitForm = async () => {
-  const data = {
-    name: name.value,
-    instagram_username: instagram.value,
-    instagram_biography: biography.value,
-    country_id: country.value,
-    image: image,
-    challenge: challenge.value
-  }
-  try {
-    const response = await competitorStore.addCompetitor(data)
-    console.log(response)
-  } catch (error) {
-    console.log(error)
-  }
-}
 </script>
 <template>
   <VueFinalModal
@@ -65,41 +44,29 @@ const submitForm = async () => {
     <section class="bg-white 0">
       <div class="">
         <h2 class="mb-4 text-2xl font-gerttb text-gray-900">Añadir nuevo competidor</h2>
-        <form action="#" @submit.prevent="submitForm">
+        <form @submit.prevent="competitorStore.addCompetitor(competitorStore.formCompetitors)">
           <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
             <div class="w-full">
-              <label for="brand" class="block mb-1 text-sm font-medium text-gray-900"
-                >Nombre del competidor</label
-              >
+              <label class="block mb-1 text-sm font-medium text-gray-900">Nombre del competidor</label>
               <input
                 type="text"
-                v-model="name"
-                name="name"
-                id="name"
+                v-model="competitorStore.formCompetitors.name"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
               />
             </div>
             <div class="w-full">
-              <label for="price" class="block mb-1 text-sm font-medium text-gray-900"
-                >Perfil de instagram</label
-              >
+              <label class="block mb-1 text-sm font-medium text-gray-900">Perfil de instagram</label>
               <div class="flex">
-                <span
-                  class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md"
-                >
-                  @
-                </span>
+                <span  class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md">@</span>
                 <input
                   type="text"
-                  id="instagram"
-                  v-model="instagram"
-                  name="instagram"
+                  v-model="competitorStore.formCompetitors.instagram_username"
                   class="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5"
                 />
               </div>
             </div>
             <div class="w-full">
-              <label for="brand" class="block mb-1 text-sm font-medium">Foto de usuario</label>
+              <label class="block mb-1 text-sm font-medium">Foto de usuario</label>
               <input
                 class="block w-full text-sm border border-gray-300 rounded-lg cursor-pointer bg-gray-50"
                 id="image"
@@ -113,17 +80,14 @@ const submitForm = async () => {
               <img v-if="selectedImage" :src="selectedImage" alt="" class="prev-img" />
             </div>
             <div>
-              <label for="category" class="block mb-1 text-sm font-medium text-gray-900"
-                >País</label
-              >
+              <label  class="block mb-1 text-sm font-medium text-gray-900">País</label>
               <select
-                id="country"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
                 required
-                v-model="country"
+                v-model="competitorStore.formCompetitors.country_id"
               >
                 <option selected="" disabled>Seleciona el país</option>
-                <option v-for="country in countries" :key="country.id" :value="country.id">
+                <option v-for="country in countryStore.countries" :key="country.id" :value="country.id">
                   {{ country.name }}
                 </option>
               </select>
@@ -131,33 +95,28 @@ const submitForm = async () => {
                 <label for="" class="block mt-4 mb-1 text-sm font-medium text-gray-900">Reto</label>
                 <input
                   type="text"
-                  v-model="challenge"
+                  v-model="competitorStore.formCompetitors.challenge"
                   class="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5"
                 />
               </div>
             </div>
             <div>
-              <label for="message" class="block mb-1 text-sm font-medium text-gray-900"
-                >Biografía</label
-              >
+              <label class="block mb-1 text-sm font-medium text-gray-900">Biografía</label>
               <textarea
-                v-model="biography"
-                id="biography"
+                v-model="competitorStore.formCompetitors.instagram_biography"
                 rows="4"
                 required
                 class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
               ></textarea>
             </div>
           </div>
-            <div class="w-full flex" style="margin-right: 15px; margin-top: 15px;">
-              <div class="w-1/2" style="margin-top:15px">
+            <div class="w-full flex">
+              <div class="w-1/2" style="margin-top:15px; margin-right: 15px;">
                 <label for="brand" class="block mb-1 text-sm font-medium text-gray-900">Destino</label
                 >
                 <input
                   type="text"
-                  v-model="name"
-                  name="name"
-                  id="name"
+                  v-model="competitorStore.formCompetitors.destination"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
                 />
               </div>
@@ -165,9 +124,7 @@ const submitForm = async () => {
                 <label for="brand" class="block mt-1 mb-1 text-sm font-medium text-gray-900">Fecha de reto</label>
                 <input
                   type="text"
-                  v-model="name"
-                  name="name"
-                  id="name"
+                  v-model="competitorStore.formCompetitors.challenge_date"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"
                 />
               </div>

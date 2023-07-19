@@ -6,6 +6,8 @@ export const useCouponsStore = defineStore('coupons', {
     state: () => ({
         coupons: [],
         token: JSON.parse(localStorage.getItem('token')),
+        showModal: false,
+        edit: '',
         formCoupon: {
             code: '',
             startFormatted: '',
@@ -64,7 +66,7 @@ export const useCouponsStore = defineStore('coupons', {
                 });
         },
         editData(data) {
-            let edit = this.budgets.find((el) => el.id == data.id)
+            let edit = this.coupons.find((el) => el.id == data.id)
             if(edit){
                 this.formCoupon.code = edit.code;
                 this.formCoupon.start_date = edit.start_date;
@@ -72,5 +74,13 @@ export const useCouponsStore = defineStore('coupons', {
                 this.formCoupon.status = edit.status;
             }
         },
+        openModal(data){
+            this.showModal = true;
+            this.edit = data;
+            this.editData(data);
+        },
+        closeModal(data){
+            this.showModal = false;
+        }
     }
 })
