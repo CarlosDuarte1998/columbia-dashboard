@@ -34,7 +34,7 @@ onMounted(async () => {
 
 </script>
 <template>
-    <VueFinalModal class="coupon-modal" content-class="coupon-modal-content" overlay-transition="vfm-fade"
+    <VueFinalModal class="coupon-modal" v-model="storeCoupons.showModal" content-class="coupon-modal-content" overlay-transition="vfm-fade"
         content-transition="vfm-fade" :click-to-close="false">
         <section class="bg-white 0">
             <div class="">

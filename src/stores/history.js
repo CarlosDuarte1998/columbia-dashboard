@@ -4,13 +4,14 @@ import axios from 'axios'
 
 export const useHistoriesStore = defineStore('histories', {
     state: () => ({
-        histories: [],
+        hist: [],
         token: JSON.parse(localStorage.getItem('token')),
     }),
     actions: {
         async getHistories() {
             const response = await axios.get('/history', {headers: { 'Authorization': `Bearer ${this.token}` }});
-            this.histories = response.data.data;
+            this.hist = response.data.data;
+            console.log(this.hist);
         },
         async addHistory(data) {
             await axios.post('/history', {

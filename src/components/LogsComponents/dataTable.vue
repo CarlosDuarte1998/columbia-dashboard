@@ -70,20 +70,31 @@ const deleteHistory = async (id) => {
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr class="pl-3">
             <th scope="col" class=" px-6 py-3">Competidor</th>
+            <th scope="col" class=" px-6 py-3">País</th>
             <th scope="col" class=" px-4 py-3">Distancia</th>
             <th scope="col" class="">time</th>
             <th scope="col" class="">Acciones</th>
           </tr>
         </thead>
-        <tbody v-for="history in historyStore.histories" :key="history.id">
+        <tbody v-for="history in historyStore.hist" :key="history.id">
           <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-            <td class="px-6 py-4">
-              <div class="flex items-center text-black text-base font-semibold">
-                {{ history.competitor.name }}
-              </div>
-            </td>
-            <td class="px-3">{{ history.distance}} m</td>
-            <td>{{ history.time }} horas</td>
+              <td class="px-6 py-4">
+                <div class="flex items-center text-black text-base font-semibold">
+                  {{ history.name }}
+                </div>
+              </td>
+              <td>
+                <span v-if="history.country_id == 1">El Salvador</span>
+                <span v-else-if="history.country_id == 2">Guatemala</span>
+                <span v-else-if="history.country_id == 3">Honduras</span>
+                <span v-else-if="history.country_id == 4">Nicaragua</span>
+                <span v-else-if="history.country_id == 5">República Dominicana</span>
+                <span v-else-if="history.country_id == 6">Panamá</span>
+                <span v-else-if="history.country_id == 7">Venezuela</span>
+                <span v-else>Costa Rica</span>
+              </td>
+              <td class="px-3">{{ history.history.max_distance }}</td>
+              <td>{{ history.history.time }}</td>
             <td>
               <div class="font-medium flex">
                 <span class="pr-3">

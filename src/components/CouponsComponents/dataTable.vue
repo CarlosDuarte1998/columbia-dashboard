@@ -91,7 +91,7 @@ const deleteCoupon = async (id) => {
           <td class="px-6 py-4">
             <div class="font-medium flex">
               <span class="pr-3">
-                <font-awesome-icon icon="fa-solid fa-pencil" :selectedId="coupon.id" @click="openEdit(coupon)" class="w-4 h-4 hover:text-black transition duration-150 cursor-pointer" /></span>
+                <font-awesome-icon icon="fa-solid fa-pencil" @click="couponsStore.openModal(coupon)" class="w-4 h-4 hover:text-black transition duration-150 cursor-pointer" /></span>
               <span class="pr-3">
                 <font-awesome-icon icon="fa-solid fa-trash" class="w-4 h-4 hover:text-black transition duration-150 cursor-pointer" @click="deleteCoupon(coupon.id)" /></span>
             </div>
