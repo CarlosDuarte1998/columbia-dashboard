@@ -65,6 +65,8 @@ const deleteCompetitor = async (id) => {
             <th scope="col" class=" px-4 py-3">Foto de perfil</th>
             <th scope="col" class=" px-4 py-3">País</th>
             <th scope="col" class=" px-4 py-3">Reto</th>
+            <th scope="col" class=" px-4 py-3">Destino</th>
+            <th scope="col" class=" px-4 py-3">Fecha de reto</th>
             <th scope="col" class=" px-4 py-3">Acciones</th>
           </tr>
         </thead>
@@ -88,12 +90,12 @@ const deleteCompetitor = async (id) => {
             </td>
             <td class="px-6 py-4">
               <div class="flex items-center">
-                  <span v-for="pais in count.countries" :key="pais.id">
-                      {{ pais.name }}
-                  </span>
+                {{ count.country.name }}
               </div>
             </td>
-            <td>{{count.challenge}} km</td>
+            <td>{{ count.challenge}} km</td>
+            <td>{{ count.destination }} </td>
+            <td>{{ count.challenge_date }} </td>
             <td class="px-6 py-4">
               <div class="font-medium flex">
                 <span class="pr-3">
