@@ -5,8 +5,8 @@ import axios from 'axios';
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     user: [],
-    token: '',
-    user_data: '',
+    token: JSON.parse(localStorage.getItem('token')),
+    user_data: JSON.parse(localStorage.getItem('user')),
     errs: ''
   }),
     actions: {
@@ -39,6 +39,7 @@ export const useAuthStore = defineStore('auth', {
         headers: { 'Authorization': `Bearer ${this.token}` }}
       ) .then(response => {
         this.token = '';
+        this.user_data = '';
         this.router.push('/');
       }) .catch(err => {
         console.log(err);

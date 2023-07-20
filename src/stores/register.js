@@ -6,6 +6,12 @@ export const useRegisterStore = defineStore('registers', {
     state: () => ({
         registers: [],
         token: JSON.parse(localStorage.getItem('token')),
+        formRegister: {
+            name: '',
+            email: '',
+            discountcode_id: '',
+            country_id: '',
+        }
     }),
     actions: {
         async getRegister() {
@@ -35,7 +41,6 @@ export const useRegisterStore = defineStore('registers', {
           headers: { 'Authorization': `Bearer ${this.token}` },
         }) .then(response => {
           this.getRegister();
-          console.log(response.data.data);
         }) .catch(error => {
           console.log(error);
         });

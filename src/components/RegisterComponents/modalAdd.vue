@@ -6,49 +6,13 @@ import { useCouponsStore } from '@/stores/coupons'
 import { useRegisterStore } from '@/stores/register'
 import Swal from 'sweetalert2'
 
-defineProps({
-
-});
-
-const emit = defineEmits(['confirm']);
 const countryStore = useCountryStore();
-const countries = ref([]);
 const couponStore = useCouponsStore();
-const coupons = ref([]);
-
+const registerStore = useRegisterStore();
 onMounted(async () => {
     await countryStore.getCountries();
     await couponStore.getCoupons();
-    countries.value = countryStore.countries;
-    coupons.value = couponStore.coupons;
-    console.log(JSON.stringify(coupons.value));
 });
-
-const name = ref('');
-const email = ref('');
-const coupon = ref('');
-const country = ref('');
-const registerStore = useRegisterStore();
-const addRegister = async () => {
-  try {
-    await registerStore.addRegister({
-        name: name.value,
-        email: email.value,
-        discountcode_id: coupon.value,
-        country_id: country.value
-    });
-    emit('confirm');
-    Swal.fire({
-      position: 'center',
-      icon: 'success',
-      title: 'Registro guardado correctamente',
-      showConfirmButton: false,
-      timer: 2500
-    });
-    } catch (error) {
-        console.log('Error al agregar el cupón:', error);
-    }
-};
 
 
 </script>
@@ -58,35 +22,37 @@ const addRegister = async () => {
         <section class="bg-white 0">
             <div class="">
                 <h2 class="mb-4 text-2xl font-gerttb text-gray-900">Nuevo registro</h2>
-                <form @submit.prevent="addRegister">
+                <form @submit.prevent="registerStore.addRegister">
                     <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
                         <div class="sm:col-span-2">
-                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nombre
-                            </label>
-                            <input type="text" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 " v-model="name">
+                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nombre</label>
+                            <input v-model="registerStore.formRegister.name" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
                         </div>
                         <div class="w-full">
                             <label for="brand" class="block mb-2 text-sm font-medium text-gray-900">Correo</label>
-                            <input type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" v-model="email">
+                            <input v-model="registerStore.formRegister.email" type="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                         </div>
                         <div class="w-full">
-                            <label for="" class="block mb-2 text-sm font-medium text-gray-900">Código</label>
-                            <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" v-model="coupon">
+                            <label class="block mb-2 text-sm font-medium text-gray-900">Código</label>
+                            <span v-for="coupon in couponStore.coupons" :key="coupon.id" :value="coupon.id">
+                            <input :value="coupon.code" type="text" disabled class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            </span>
+                            <!--<select v-model="registerStore.formRegister.discountcode_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                                 <option selected="" disabled>Seleciona el código</option>
-                                <option v-for="coupon in coupons" :key="coupon.id" :value="coupon.id">{{ coupon.code }}</option>
-                            </select>
+                                <option v-for="coupon in couponStore.coupons" :key="coupon.id" :value="coupon.id">{{ coupon.code }}</option>
+                            </select>-->
                         </div>
                         <div class="w-full">
-                            <label for="" class="block mb-2 text-sm font-medium text-gray-900">País</label>
-                            <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" v-model="country">
+                            <label class="block mb-2 text-sm font-medium text-gray-900">País</label>
+                            <select v-model="registerStore.formRegister.country_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                                 <option selected="" disabled>Seleciona el competidor</option>
-                                <option v-for="country in countries" :key="country.id" :value="country.id">{{country.name}}</option>
+                                <option v-for="country in countryStore.countries" :key="country.id" :value="country.id">{{country.name}}</option>
                             </select>
                         </div>
                         
                     </div>
                     <div class="flex w-full justify-end items-center mt-8">
-                        <button @click="emit('confirm')" class="bg-red-600 p-2 rounded-md cursor-pointer text-white">
+                        <button type="button" click-to-close="true" class="bg-red-600 p-2 rounded-md cursor-pointer text-white">
                             Cancelar
                         </button>
                         <button class="bg-green-600 ml-2 p-2 rounded-md text-white cursor-pointer">

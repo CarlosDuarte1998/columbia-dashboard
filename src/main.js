@@ -1,9 +1,10 @@
 import { createApp, markRaw } from 'vue'
-import { createPinia } from 'pinia'
+import App from './App.vue'
 import router from './router'
+import { createPinia } from 'pinia'
+import './axios'
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
-import App from './App.vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import * as IconsFa from '@fortawesome/free-solid-svg-icons'
@@ -12,7 +13,6 @@ import 'sweetalert2/dist/sweetalert2.min.css'
 import { createVfm } from 'vue-final-modal'
 import 'vue-final-modal/style.css'
 import 'vue3-easy-data-table/dist/style.css';
-import './axios'
 
 
 
@@ -40,10 +40,10 @@ library.add(
 )
 
 const app = createApp(App)
-app.use(createVfm())
-app.use(VueSweetalert2)
 app.use(router)
 app.use(pinia) 
+app.use(createVfm())
+app.use(VueSweetalert2)
 app.component('VueDatePicker', VueDatePicker);
 app.component('font-awesome-icon', FontAwesomeIcon)
 app.mount('#app')

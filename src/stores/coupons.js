@@ -17,9 +17,13 @@ export const useCouponsStore = defineStore('coupons', {
     }),
     actions: {
         async getCoupons() {
-            const response = await axios.get('/discount-codes', { headers: { 'Authorization': `Bearer ${this.token}` } });
-            this.coupons = response.data.data;
-
+            await axios.get('/discount-codes', { headers: { 'Authorization': `Bearer ${this.token}` } })
+            .then(response => {
+                this.coupons = response.data.data;
+            })
+            .catch(err => {
+                console.log(err);
+            });
         },
         async addCoupon(data) {
             console.log(data);
