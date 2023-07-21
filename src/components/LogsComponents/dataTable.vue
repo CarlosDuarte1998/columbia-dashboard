@@ -1,29 +1,15 @@
 <script setup>
-import { useModal } from 'vue-final-modal'
-import modalEdit from './modalEdit.vue';
-import { ref, onMounted } from 'vue';
+import { VueFinalModal } from 'vue-final-modal'
+import { onMounted, ref } from 'vue'
 import { useHistoriesStore } from '@/stores/history';
 import Swal from 'sweetalert2';
-
-
-const { open: openEdit, close: closeEdit } = useModal({
-  component: modalEdit,
-  attrs: {
-    onConfirm() {
-      closeEdit()
-    }
-  },
-});
-
-// Obtención de bitacora desde el almacén
 
 const historyStore = useHistoriesStore();
 onMounted(async () => {
   await historyStore.getHistories();
 });
 
-// Se realiza la pregunta con swal para confirmar la eliminación de la bitacora y si confirma se envia el id al stores
-
+/*
 const deleteHistory = async (id) => {
   const result = await Swal.fire({
     title: '¿Seguro que desea eliminar?',
@@ -59,8 +45,7 @@ const deleteHistory = async (id) => {
     )
   }
 };
-
-
+ */
 
 </script>
 <template>
@@ -89,8 +74,11 @@ const deleteHistory = async (id) => {
             <td>
               <div class="font-medium flex">
                 <span class="pr-3">
-                  <font-awesome-icon icon="fa-solid fa-pencil"
-                    class="w-4 h-4  hover:text-black transition duration-150 cursor-pointer"   @click="openEdit"/></span>
+                  <font-awesome-icon
+                    icon="fa-solid fa-pencil"
+                    @click="historyStore.openModal(history)"
+                    class="w-4 h-4 hover:text-black transition duration-150 cursor-pointer"
+                /></span>
                 <span class="pr-3">
                   <font-awesome-icon icon="fa-solid fa-trash"
                     class="w-4 h-4  hover:text-black transition duration-150 cursor-pointer" @click="deleteHistory(history.id)" /></span>
@@ -100,5 +88,51 @@ const deleteHistory = async (id) => {
         </tbody>
       </table>
     </div>
+
+    
+    <VueFinalModal
+      v-model="historyStore.modalEdit"
+      class="coupon-modal"
+      content-class="coupon-modal-content"
+      overlay-transition="vfm-fade"
+      content-transition="vfm-fade">
+        <section class="bg-white 0">
+            <div class="">
+                <h2 class="mb-4 text-2xl font-gerttb text-gray-900">Editar bitácora</h2>
+                <form action="#">
+                    <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+                        <div class="sm:col-span-2">
+                            <label class="block mb-2 text-sm font-medium text-gray-900">Competidor</label>
+                            <select v-model="historyStore.formHistory.competitor_id"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+                                <option selected="" disabled>Seleciona el competidor</option>
+                                <option value="TV">Carlos Duarte</option>
+                                <option value="PC">Alexander Duarte</option>
+                            </select>
+                        </div>
+                        <div class="w-full">
+                            <label class="block mb-2 text-sm font-medium text-gray-900">Distancia</label>
+                            <input type="text" v-model="historyStore.formHistory.distance"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
+                        </div>
+                        <div class="w-full">
+                            <label class="block mb-2 text-sm font-medium text-gray-900">Fecha de registro</label>
+                            <VueDatePicker :teleport="true" teleport-center :model-value="date" time-picker-inline
+                                :is-24="false" @update:model-value="handleDate" />
+                        </div>
+
+                    </div>
+                    <div class="flex w-full justify-end items-center mt-8">
+                        <span  @click="historyStore.modalEdit=false" class="bg-red-600 p-2 rounded-md cursor-pointer text-white">
+                            Cancelar
+                        </span>
+                        <button type="submit" class="bg-green-600 ml-2 p-2 rounded-md text-white cursor-pointer">
+                            Guardar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </VueFinalModal>
   </div>
 </template>

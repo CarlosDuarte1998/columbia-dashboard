@@ -31,9 +31,7 @@ onMounted(async () => {
   <div class="mt-2 p-4">
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
       <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead
-          class="text-xs border-b text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
-        >
+        <thead class="text-xs border-b text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr class="pl-3">
             <th scope="col" class="px-6 py-3">Código</th>
             <th scope="col" class="px-6 py-3">Fecha de inicio</th>
@@ -43,13 +41,8 @@ onMounted(async () => {
           </tr>
         </thead>
         <tbody v-for="coupon in couponsStore.coupons" :key="coupon.id">
-          <tr
-            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-          >
-            <th
-              scope="row"
-              class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
-            >
+          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+            <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
               <div class="">
                 <div class="text-base font-semibold text-code">{{ coupon.code }}</div>
               </div>

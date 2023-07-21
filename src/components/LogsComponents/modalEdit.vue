@@ -2,15 +2,8 @@
 import { VueFinalModal } from 'vue-final-modal'
 import { defineProps, defineEmits, ref } from 'vue'
 
-defineProps({
-
-});
-
 const emit = defineEmits(['confirm']);
-
-/*Obtencion y manejo del DatePicker*/
 const date = ref(new Date());
-
 const handleDate = (modelData) => {
     const options = {
         day: 'numeric',
@@ -31,7 +24,7 @@ const handleDate = (modelData) => {
         content-transition="vfm-fade" :click-to-close="true">
         <section class="bg-white 0">
             <div class="">
-                <h2 class="mb-4 text-2xl font-gerttb text-gray-900">Añadir nueva bitacora</h2>
+                <h2 class="mb-4 text-2xl font-gerttb text-gray-900">Editar bitácora</h2>
                 <form action="#">
                     <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
                         <div class="sm:col-span-2">

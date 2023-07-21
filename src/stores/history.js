@@ -6,6 +6,8 @@ export const useHistoriesStore = defineStore('histories', {
     state: () => ({
         hist: [],
         token: JSON.parse(localStorage.getItem('token')),
+        modalEdit: false,
+        edit: '',
         formHistory: {
             competitor_id: '',
             distance: '',
@@ -14,8 +16,10 @@ export const useHistoriesStore = defineStore('histories', {
     }),
     actions: {
         async getHistories() {
-            const response = await axios.get('/history', {headers: { 'Authorization': `Bearer ${this.token}` }});
-            this.hist = response.data.data;
+            await axios.get('/history', {headers: { 'Authorization': `Bearer ${this.token}` }})
+            .then(response => {
+                this.hist = response.data.data;
+            }) .catch(err => { console.log(err); });
         },
         async addHistory(data) {
             await axios.post('/history', {
@@ -24,7 +28,7 @@ export const useHistoriesStore = defineStore('histories', {
                 distance: data.distance,
             }, { headers: { 'Authorization': `Bearer ${this.token}` } })
                 .then(response => {
-                    this.histories = response.data.data;
+                    this.hist = response.data.data;
                 })
                 .catch(error => {
                     console.log(error);
@@ -34,7 +38,7 @@ export const useHistoriesStore = defineStore('histories', {
         async deleteHistory(id) {
             await axios.delete(`/history/${id}`, { headers: { 'Authorization': `Bearer ${this.token}` } })
                 .then(response => {
-                    this.histories = this.histories.filter(history => history.id !== id);
+                    this.hist = this.hist.filter(history => history.id !== id);
                 })
                 .catch(error => {
                     console.log(error);
@@ -59,6 +63,19 @@ export const useHistoriesStore = defineStore('histories', {
                     console.log(error);
                 }
             );
+        },
+        editData(data) {
+            let edit = this.hist.find((el) => el.id == data.id)
+            if(edit){
+                this.formHistory.code = edit.competitor_id;
+                this.formHistory.start_date = edit.distance;
+                this.formHistory.end_date = edit.time;
+            }
+        },
+        openModal(data){
+            this.modalEdit = true;
+            this.edit = data;
+            this.editData(data);
         },
     }
 });

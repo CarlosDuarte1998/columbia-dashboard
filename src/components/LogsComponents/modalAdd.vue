@@ -6,7 +6,6 @@ import {useHistoriesStore} from '@/stores/history'
 import Swal from 'sweetalert2/dist/sweetalert2';
 
 const emit = defineEmits(['confirm']);
-
 const competitorStore = useCompetitorStore();
 const storeHistories = useHistoriesStore();
 onMounted(async () => {
