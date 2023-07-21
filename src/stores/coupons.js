@@ -26,7 +26,6 @@ export const useCouponsStore = defineStore('coupons', {
             });
         },
         async addCoupon(data) {
-            console.log(data);
             await axios.post('/discount-codes', {
                 code: data.code,
                 start_date: data.start_date,

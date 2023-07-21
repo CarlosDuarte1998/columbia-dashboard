@@ -28,7 +28,6 @@ export const useCompetitorStore = defineStore('competitors', {
       });
     },
     async addCompetitor(data) {
-      console.log(data);
       await axios.post('/competitors/', {
         name: data.name,
         instagram_username: data.instagram_username,
@@ -53,7 +52,6 @@ export const useCompetitorStore = defineStore('competitors', {
         headers: { 'Authorization': `Bearer ${this.token}` },
       }) .then(response => {
         this.getCompetitors();
-        console.log(response.data.data);
       }) .catch(error => {
         console.log(error);
       });

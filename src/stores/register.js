@@ -6,10 +6,10 @@ export const useRegisterStore = defineStore('registers', {
     state: () => ({
         registers: [],
         token: JSON.parse(localStorage.getItem('token')),
+        showModal: false,
         formRegister: {
             name: '',
             email: '',
-            discountcode_id: '',
             country_id: '',
         }
     }),
@@ -24,13 +24,13 @@ export const useRegisterStore = defineStore('registers', {
         },
         async addRegister(data) {
             await axios.post('/registers', {
-                discountcode_id: data.discountcode_id,
                 name: data.name,
                 country_id: data.country_id,
                 email: data.email,
             }, {headers: { 'Authorization': `Bearer ${this.token}` }})
             .then(response => {
                 this.getRegister();
+                this.close();
             })
             .catch(error => {
                 console.log(error);
@@ -44,6 +44,12 @@ export const useRegisterStore = defineStore('registers', {
         }) .catch(error => {
           console.log(error);
         });
+      },
+      modal(){
+        this.showModal = true;
+      },
+      close(){
+        this.showModal = false;
       }
     }
 });

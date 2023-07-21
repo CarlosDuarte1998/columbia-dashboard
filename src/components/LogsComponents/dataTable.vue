@@ -83,16 +83,7 @@ const deleteHistory = async (id) => {
                   {{ history.name }}
                 </div>
               </td>
-              <td>
-                <span v-if="history.country_id == 1">El Salvador</span>
-                <span v-else-if="history.country_id == 2">Guatemala</span>
-                <span v-else-if="history.country_id == 3">Honduras</span>
-                <span v-else-if="history.country_id == 4">Nicaragua</span>
-                <span v-else-if="history.country_id == 5">República Dominicana</span>
-                <span v-else-if="history.country_id == 6">Panamá</span>
-                <span v-else-if="history.country_id == 7">Venezuela</span>
-                <span v-else>Costa Rica</span>
-              </td>
+              <td>{{ history.country.name }}</td>
               <td class="px-3">{{ history.history.max_distance }}</td>
               <td>{{ history.history.time }}</td>
             <td>

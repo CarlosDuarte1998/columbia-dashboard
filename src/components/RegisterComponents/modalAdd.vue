@@ -17,12 +17,12 @@ onMounted(async () => {
 
 </script>
 <template>
-    <VueFinalModal class="coupon-modal" content-class="coupon-modal-content" overlay-transition="vfm-fade"
+    <VueFinalModal class="coupon-modal" v-model="registerStore.showModal" content-class="coupon-modal-content" overlay-transition="vfm-fade"
         content-transition="vfm-fade" :click-to-close="false">
         <section class="bg-white 0">
             <div class="">
                 <h2 class="mb-4 text-2xl font-gerttb text-gray-900">Nuevo registro</h2>
-                <form @submit.prevent="registerStore.addRegister">
+                <form @submit.prevent="registerStore.addRegister(registerStore.formRegister)">
                     <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
                         <div class="sm:col-span-2">
                             <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nombre</label>
@@ -35,7 +35,7 @@ onMounted(async () => {
                         <div class="w-full">
                             <label class="block mb-2 text-sm font-medium text-gray-900">Código</label>
                             <span v-for="coupon in couponStore.coupons" :key="coupon.id" :value="coupon.id">
-                            <input :value="coupon.code" type="text" disabled class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                <input :value="coupon.code" type="text" disabled class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                             </span>
                             <!--<select v-model="registerStore.formRegister.discountcode_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                                 <option selected="" disabled>Seleciona el código</option>
