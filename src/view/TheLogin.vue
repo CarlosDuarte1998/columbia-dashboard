@@ -6,7 +6,7 @@ const usuario = useAuthStore()
 const formUser = reactive({
   email: '',
   password: ''
-})
+});
 </script>
 <template>
   <div>

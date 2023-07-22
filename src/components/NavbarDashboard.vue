@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import HeaderDashboard from './HeaderDashboard.vue';
-import sectionRegister from './SectionRegister.vue';
+import sectionRegister from './sectionRegister.vue';
 
 let user = JSON.parse(localStorage.getItem('user'));
 

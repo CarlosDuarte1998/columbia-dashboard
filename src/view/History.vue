@@ -2,11 +2,11 @@
 import { ref, onMounted } from 'vue'
 import { ModalsContainer } from 'vue-final-modal';
 import NavbarDashboard from '../components/NavbarDashboard.vue';
-import SectionLogs from '../components/SectionLogs.vue';
+import sectionLogs from '../components/sectionLogs.vue';
 
 </script>
 
 <template>
     <NavbarDashboard />
-    <SectionLogs />
+    <sectionLogs />
 </template>
