@@ -65,11 +65,12 @@ export const useHistoriesStore = defineStore('histories', {
             );
         },
         editData(data) {
-            let edit = this.hist.find((el) => el.id == data.id)
-            if(edit){
-                this.formHistory.code = edit.competitor_id;
-                this.formHistory.start_date = edit.distance;
-                this.formHistory.end_date = edit.time;
+            let edit = Object.entries(this.hist).find(([key, value]) => value.id == data.id)
+            let fill = edit[1];
+            if(fill){
+                this.formHistory.competitor_id = fill.id;
+                this.formHistory.distance = fill.history.max_distance;
+                this.formHistory.time = fill.history.time;
             }
         },
         openModal(data){

@@ -69,8 +69,8 @@ onMounted(async () => {
                   <font-awesome-icon
                     icon="fa-solid fa-pencil"
                     @click="couponsStore.openModal(coupon)"
-                    class="w-4 h-4 hover:text-black transition duration-150 cursor-pointer"
-                /></span>
+                    class="w-4 h-4 hover:text-black transition duration-150 cursor-pointer" />
+                  </span>
                 <!--<span class="pr-3">
                 <font-awesome-icon icon="fa-solid fa-trash" class="w-4 h-4 hover:text-black transition duration-150 cursor-pointer" @click="deleteCoupon(coupon.id)" />
               </span>-->

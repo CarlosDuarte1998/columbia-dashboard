@@ -69,6 +69,8 @@ export const useCouponsStore = defineStore('coupons', {
                 });
         },
         editData(data) {
+            console.log('coupons', this.coupons);
+            console.log('param', data);
             let edit = this.coupons.find((el) => el.id == data.id)
             if(edit){
                 this.formCoupon.code = edit.code;

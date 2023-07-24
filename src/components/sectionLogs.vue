@@ -21,8 +21,8 @@ const { open: openAdd, close: closeAdd } = useModal({
       <div class="flex w-full justify-end">
         <button @click="openAdd"
           class="border mr-4 border-black p-2 cursor-pointer butt">
-          <font-awesome-icon icon="fa-solid fa-plus" /> Nuevo registro
-        </button>
+          <font-awesome-icon icon="fa-solid fa-plus" /> Nuevo registro en bitácora
+        </button><br>
       </div>
       <dataTable />
     </div>

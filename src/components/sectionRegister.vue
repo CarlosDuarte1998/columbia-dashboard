@@ -63,9 +63,10 @@ onMounted(async () => {
                                 <option v-for="country in countryStore.countries" :key="country.id" :value="country.id">{{country.name}}</option>
                             </select>
                         </div>
-                    </div>
+                    </div><br>    
+                    <p>*Recuerda que se enviará el código de descuento al correo electrónico ingresado en este formulario</p>
                     <div class="flex w-full justify-end items-center mt-8">
-                        <button type="button" click-to-close="true" class="bg-red-600 p-2 rounded-md cursor-pointer text-white">
+                        <button type="button" @click="registerStore.close" class="bg-red-600 p-2 rounded-md cursor-pointer text-white">
                             Cancelar
                         </button>
                         <button class="bg-green-600 ml-2 p-2 rounded-md text-white cursor-pointer">

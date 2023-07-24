@@ -7,6 +7,7 @@ export const useCompetitorStore = defineStore('competitors', {
   state: () => ({
     competitors: [],
     token: JSON.parse(localStorage.getItem('token')),
+    showModal: false,
     formCompetitors: {
       name: '',
       instagram_username: '',
@@ -55,6 +56,26 @@ export const useCompetitorStore = defineStore('competitors', {
       }) .catch(error => {
         console.log(error);
       });
+    },
+    editData(data) {
+        let edit = this.competitors.find((el) => el.id == data.id)
+        if(edit){
+            this.formCompetitors.name = edit.name;
+            this.formCompetitors.instagram_username = edit.instagram_username;
+            this.formCompetitors.instagram_biography = edit.instagram_biography;
+            this.formCompetitors.country_id = edit.country.id;
+            this.formCompetitors.challenge = edit.challenge;
+            this.formCompetitors.image = edit.image;
+            this.formCompetitors.destination = edit.destination;
+            this.formCompetitors.challenge_date = edit.challenge_date;
+        }
+    },
+    openModal(data){
+      this.showModal = true;
+      this.editData(data);
+    },
+    close(){
+      this.showModal = false;
     }
   },
 });

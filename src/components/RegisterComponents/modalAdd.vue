@@ -49,7 +49,6 @@ onMounted(async () => {
                                 <option v-for="country in countryStore.countries" :key="country.id" :value="country.id">{{country.name}}</option>
                             </select>
                         </div>
-                        
                     </div>
                     <div class="flex w-full justify-end items-center mt-8">
                         <button type="button" click-to-close="true" class="bg-red-600 p-2 rounded-md cursor-pointer text-white">

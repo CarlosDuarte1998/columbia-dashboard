@@ -2,11 +2,14 @@
 import { VueFinalModal } from 'vue-final-modal'
 import { onMounted, ref } from 'vue'
 import { useHistoriesStore } from '@/stores/history';
+import { useCompetitorStore } from '@/stores/competitor'
 import Swal from 'sweetalert2';
 
 const historyStore = useHistoriesStore();
+const competitorStore = useCompetitorStore();
 onMounted(async () => {
   await historyStore.getHistories();
+  await competitorStore.getCompetitors();
 });
 
 /*
@@ -106,8 +109,9 @@ const deleteHistory = async (id) => {
                             <select v-model="historyStore.formHistory.competitor_id"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                                 <option selected="" disabled>Seleciona el competidor</option>
-                                <option value="TV">Carlos Duarte</option>
-                                <option value="PC">Alexander Duarte</option>
+                                <option v-for="comp in competitorStore.competitors" :key="comp.id" :value="comp.id">
+                                  {{ comp.name }}
+                                </option>
                             </select>
                         </div>
                         <div class="w-full">
@@ -117,8 +121,8 @@ const deleteHistory = async (id) => {
                         </div>
                         <div class="w-full">
                             <label class="block mb-2 text-sm font-medium text-gray-900">Fecha de registro</label>
-                            <VueDatePicker :teleport="true" teleport-center :model-value="date" time-picker-inline
-                                :is-24="false" @update:model-value="handleDate" />
+                            <input type="text" v-model="historyStore.formHistory.time"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" />
                         </div>
 
                     </div>
